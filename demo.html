@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>攻略サイト ホーム</title>
+  <link rel="stylesheet" href="demostyle.css">
+</head>
+<body>
+
+  <!-- 上部：スワイプ可能なスライダー -->
+  <div class="slider-container">
+    <div class="slider">
+      <!-- スライド1 -->
+      <a href="#event1" class="slide" style="background-color: #3498db;">
+        <h2>開催中イベント1</h2>
+      </a>
+      <!-- スライド2 -->
+      <a href="#event2" class="slide" style="background-color: #e67e22;">
+        <h2>開催中イベント2</h2>
+      </a>
+      <!-- スライド3 -->
+      <a href="#team" class="slide" style="background-color: #9b59b6;">
+        <h2>チームイベント</h2>
+      </a>
+    </div>
+  </div>
+  <div class="minigame-container">
+    <div class="">
+      <h2>ミニゲーム攻略一覧</h2>
+      <div class="kishitonosougu"></div>
+      <div class="doubutu"></div>
+    </div>
+  </div>
+  <!-- メインコンテンツ（ホーム画面の6つのリンク） -->
+  <main class="content">
+    <h2>各種コンテンツ</h2>
+    <div class="links-grid">
+      <a href="team.html" class="card">チームイベント</a>
+      <a href="minigame.html" class="card">ミニゲーム</a>
+      <a href="retainer.html" class="card">家来</a>
+      <a href="beauty.html" class="card">美女</a>
+      <!-- 定期的に手動更新するリンク -->
+      <a href="current1.html" class="card event-card">現在開催中の<br>イベントA</a>
+      <a href="current2.html" class="card event-card">現在開催中の<br>イベントB</a>
+    </div>
+  </main>
+
+
+<!-- 全ページ共通設定 -->
+  <!-- 画面下部：半円展開メニュー -->
+  <div class="radial-menu" id="radialMenu">
+    <!-- 展開される5つのリンクボタン -->
+    <!-- --i はCSSで半円の配置角度を計算するための変数です（0〜5） -->
+    <div class="menu-items">
+      <a href="team.html" class="menu-item" style="--i: 0;">チーム</a>
+      <a href="minigame.html" class="menu-item" style="--i: 1;">ミニ</a>
+      <a href="demo.html" class="menu-item" style="--i: 2;">ホーム</a>
+      <a href="retainer.html" class="menu-item" style="--i: 3;">家来</a>
+      <a href="beauty.html" class="menu-item" style="--i: 4;">美女</a>
+    </div>
+    
+    <!-- 中央のトグルボタン（縦三本線） -->
+<!-- 中央のトグルボタン（画像に変更） -->
+    <button class="menu-toggle" id="menuToggle">
+      <!-- "image.png" の部分をご自身の画像ファイル名（パス）に変更してください -->
+      <img src="menubotton.png" alt="メニュー">
+    </button>
+  </div>
+
+  <script src="demoscript.js"></script>
+</body>
+</html>

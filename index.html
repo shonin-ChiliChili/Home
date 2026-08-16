@@ -2,74 +2,99 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>攻略サイト ホーム</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ゲームイベント管理ポータル</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="common_style.css">
 </head>
 <body>
 
-  <!-- 上部：スワイプ可能なスライダー -->
-  <div class="slider-container">
-    <div class="slider">
-      <!-- スライド1 -->
-      <a href="#event1" class="slide" style="background-color: #3498db;">
-        <h2>開催中イベント1</h2>
-      </a>
-      <!-- スライド2 -->
-      <a href="#event2" class="slide" style="background-color: #e67e22;">
-        <h2>開催中イベント2</h2>
-      </a>
-      <!-- スライド3 -->
-      <a href="#team" class="slide" style="background-color: #9b59b6;">
-        <h2>チームイベント</h2>
-      </a>
+  <!-- ヘッダー -->
+  <header class="top-bar">
+    <div class="logo">🎮 ギルドイベント戦績</div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- ▼ ホーム/イベント一覧画面 ▼ -->
+    <div id="view-home" class="view-section active">
+      <h3 class="section-title">開催イベント一覧</h3>
+      <div id="event-list-container">
+        <!-- JSでイベントカードが自動挿入されます -->
+      </div>
     </div>
-  </div>
-  <div class="minigame-container">
-    <div class="">
-      <h2>ミニゲーム攻略一覧</h2>
-      <div class="kishitonosougu"></div>
-      <div class="doubutu"></div>
+
+    <!-- ▼ イベント詳細画面 ▼ -->
+    <div id="view-event-detail" class="view-section">
+      <button id="back-to-events-btn" class="btn-secondary" style="margin-bottom: 15px;">← イベント一覧に戻る</button>
+      <h3 id="detail-event-title" class="section-title">イベント名</h3>
+      <div id="event-history-container">
+        <!-- JSで日付ごとの全員の戦績が自動挿入されます -->
+      </div>
     </div>
-  </div>
-  <!-- メインコンテンツ（ホーム画面の6つのリンク） -->
-  <main class="content">
-    <h2>各種コンテンツ</h2>
-    <div class="links-grid">
-      <a href="team.html" class="card">チームイベント</a>
-      <a href="minigame.html" class="card">ミニゲーム</a>
-      <a href="retainer.html" class="card">家来</a>
-      <a href="beauty.html" class="card">美女</a>
-      <!-- 定期的に手動更新するリンク -->
-      <a href="current1.html" class="card event-card">現在開催中の<br>イベントA</a>
-      <a href="current2.html" class="card event-card">現在開催中の<br>イベントB</a>
+
+    <!-- ▼ マイページ画面 ▼ -->
+    <div id="view-profile" class="view-section">
+      <h3 class="section-title">マイページ</h3>
+
+      <!-- 未ログイン状態（ID入力フォーム） -->
+      <div id="login-form" class="card text-center">
+        <p>プレイヤーID（番号）を入力してください。</p>
+        <p class="hint">※テスト用ID: 1001 (田中), 1002 (佐藤)</p>
+        <input type="number" id="member-id-input" placeholder="例: 1001" inputmode="numeric">
+        <p id="login-error" class="error-msg hidden">該当するIDが見つかりません。</p>
+        <button id="login-btn" class="btn-primary" style="width: 100%;">戦績を見る</button>
+      </div>
+
+      <!-- ログイン成功後の表示エリア -->
+      <div id="user-dashboard" class="hidden">
+        <div class="user-header card">
+          <div class="user-icon">👤</div>
+          <h4 id="user-name">---</h4>
+          <p>ID: <span id="user-id-display">----</span></p>
+          <button id="logout-btn" class="btn-secondary btn-sm" style="margin-top: 10px;">ID変更</button>
+        </div>
+
+        <!-- 表示形式の切り替えタブ -->
+        <div class="display-toggle-tabs">
+          <button id="tab-timeline" class="toggle-tab active">日付順（時系列）</button>
+          <button id="tab-by-event" class="toggle-tab">イベント別</button>
+        </div>
+
+        <!-- 時系列表示 -->
+        <div id="personal-timeline-view">
+          <!-- JSで自動生成 -->
+        </div>
+
+        <!-- イベント別表示 -->
+        <div id="personal-by-event-view" class="hidden">
+          <!-- JSで自動生成 -->
+        </div>
+      </div>
+
     </div>
+
   </main>
 
-
-<!-- 全ページ共通設定 -->
-  <!-- 画面下部：半円展開メニュー -->
-  <div class="radial-menu" id="radialMenu">
-    <!-- 展開される5つのリンクボタン -->
-    <!-- --i はCSSで半円の配置角度を計算するための変数です（0〜5） -->
-    <div class="menu-items">
-      <a href="team.html" class="menu-item" style="--i: 0;">チーム</a>
-      <a href="minigame.html" class="menu-item" style="--i: 1;">ミニ</a>
-      <a href="index.html" class="menu-item" style="--i: 2;">ホーム</a>
-      <a href="retainer.html" class="menu-item" style="--i: 3;">家来</a>
-      <a href="beauty.html" class="menu-item" style="--i: 4;">美女</a>
-    </div>
-    
-    <!-- 中央のトグルボタン（縦三本線） -->
-<!-- 中央のトグルボタン（画像に変更） -->
-    <button class="menu-toggle" id="menuToggle">
-      <!-- "image.png" の部分をご自身の画像ファイル名（パス）に変更してください -->
-      <img src="img/menu.png" alt="メニュー">
-    </button>
-  </div>
+  <!-- 下部固定ナビゲーション -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item" data-target="char">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">ホーム</span>
+    </a>
+    <a href="#" class="nav-item" data-target="minigame">
+      <span class="nav-icon">🎮</span>
+      <span class="nav-label">ミニゲーム</span>
+    </a>
+    <a href="#" class="nav-item active" data-target="home">
+      <span class="nav-icon">🏆</span>
+      <span class="nav-label">イベント</span>
+    </a>
+    <a href="#" class="nav-item" data-target="profile">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">マイページ</span>
+    </a>
+  </nav>
 
   <script src="script.js"></script>
-  <script src="common_script.js"></script>
 </body>
 </html>

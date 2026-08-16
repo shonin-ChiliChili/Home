@@ -1,3 +1,18 @@
+// 数値（例: 125000）を「12.5万」などの文字列に変換する関数
+function formatPoints(num) {
+  if (typeof num !== 'number' || isNaN(num)) return '0';
+  
+  if (num >= 100000000) {
+    const oku = num / 100000000;
+    return (num % 100000000 === 0 ? oku : parseFloat(oku.toFixed(2))) + '億';
+  }
+  if (num >= 10000) {
+    const man = num / 10000;
+    return (num % 10000 === 0 ? man : parseFloat(man.toFixed(2))) + '万';
+  }
+  return num.toLocaleString();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
 
   let gameData = { users: {}, events: [] };
@@ -6,7 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 1. 複数JSONファイルの動的読み込み
   // ==========================================
   try {
-    // ユーザー一覧とイベントファイルリストを同時に取得
     const [usersRes, eventsListRes] = await Promise.all([
       fetch('users.json'),
       fetch('events.json')
@@ -19,11 +33,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     gameData.users = await usersRes.json();
     const eventFiles = await eventsListRes.json();
 
-    // events.json に記載されたすべてのイベントJSONを並列読み込み
     const eventFetches = eventFiles.map(filePath => fetch(filePath).then(res => res.json()));
     const rawEvents = await Promise.all(eventFetches);
 
-    // 読み込んだ個別イベントデータを「イベント種別ごと」にグループ化して統合
     gameData.events = structureEventsData(rawEvents);
 
   } catch (error) {
@@ -32,7 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  // 分割されたイベントデータを既存の表示用データ構造に変換する関数
   function structureEventsData(rawEvents) {
     const eventMap = {};
 
@@ -50,7 +61,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
 
-    // 各イベント内の履歴を新しい日付順にソート
     Object.values(eventMap).forEach(evt => {
       evt.history.sort((a, b) => new Date(b.date) - new Date(a.date));
     });
@@ -58,7 +68,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     return Object.values(eventMap);
   }
 
-  // 状態管理
   let currentUserId = null;
 
   // ==========================================
@@ -123,7 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `
           <li class="score-item">
             <span>${userName}</span>
-            <span class="points">${r.points.toLocaleString()} pt</span>
+            <span class="points">${formatPoints(r.points)}</span>
           </li>
         `;
       }).join('');
@@ -213,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.innerHTML = `
         <span class="date-badge">${r.date}</span>
         <h4 style="margin:5px 0;">${r.eventName}</h4>
-        <p class="points" style="margin:0; font-size:16px;">${r.points.toLocaleString()} pt</p>
+        <p class="points" style="margin:0; font-size:16px;">${formatPoints(r.points)}</p>
       `;
       timelineContainer.appendChild(card);
     });
@@ -228,7 +237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         let listHtml = myEventRecords.map(r => `
           <li class="score-item">
             <span>${r.date}</span>
-            <span class="points">${r.points.toLocaleString()} pt</span>
+            <span class="points">${formatPoints(r.points)}</span>
           </li>
         `).join('');
 

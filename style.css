@@ -1,202 +1,167 @@
-/* 共通設定 */
+:root {
+  --primary-color: #3f51b5;
+  --bg-color: #f4f6f8;
+  --text-main: #333;
+  --text-sub: #666;
+}
+
 body {
   margin: 0;
-  font-family: sans-serif;
-  background-color: #f5f6fa;
-  padding-bottom: 120px; /* 下部メニューに隠れないように余白を確保 */
-}
-
-/* スライダー設定 */
-.slider-container {
-  width: 100%;
-  overflow: hidden;
-}
-
-.slider {
-  display: flex;
-  overflow-x: auto;
-  /* スワイプ時にピタッと止まるようにする設定 */
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* スクロールバーを隠す (Firefox) */
-}
-.slider::-webkit-scrollbar {
-  display: none; /* スクロールバーを隠す (Chrome/Safari) */
-}
-
-.slide {
-  flex: 0 0 100%;
-  height: 200px;
-  scroll-snap-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-
-/* メインコンテンツ設定 */
-.content {
-  padding: 20px;
-}
-.links-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 2列配置 */
-  gap: 15px;
-}
-.card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 10px;
-  background: white;
-  text-align: center;
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.event-card {
-  border: 2px solid #e74c3c;
-  color: #e74c3c;
-}
-
-.minigame-container h2 {
-  background-color: #e74c3c;
-}
-
-
-
-
-
-
-
-
-
-/* -----------------------------
-   半円展開メニューの設定
------------------------------- */
-.radial-menu {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
-
-/* 丸いメインボタン（縦三本線） */
-.menu-toggle {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background-color: #fff9f9;
-  border: none;
-  display: flex;
-  flex-direction: row; /* 横に並べて縦線を表現 */
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
   position: relative;
-  z-index: 2;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.3s;
+  padding-bottom: 80px;
 }
 
-/* 追加：画像をボタンのサイズに合わせて丸く表示する */
-.menu-toggle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 画像の比率を崩さずに枠全体を埋める */
-  border-radius: 50%; /* ボタンに合わせて画像を丸く切り抜く */
+.top-bar {
+  background-color: #fff;
+  padding: 15px 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.main-content {
+  padding: 15px;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.text-center { text-align: center; }
+.hidden { display: none !important; }
+
+.view-section {
+  display: none;
+}
+.view-section.active {
   display: block;
 }
 
-/* メニューが開いている時、ボタンを回転させる */
-.radial-menu.active .menu-toggle {
-  transform: rotate(90deg);
-  background-color: fff;
+/* ボタン類 */
+.btn-primary {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 }
-
-/* 展開されるリンクアイテム */
-.menu-items {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  z-index: 1;
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
 }
+.btn-sm { font-size: 12px; padding: 4px 10px; }
 
-.menu-item {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: #dd7474; /* 展開された後の小さいボタンの背景 */
-  color: white;
-  border-radius: 50%;
+/* 入力フォーム */
+#member-id-input {
+  width: 80%;
+  padding: 10px;
+  margin: 15px 0;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.hint { font-size: 11px; color: #888; }
+.error-msg { color: #d32f2f; font-size: 12px; }
+
+/* イベントカード */
+.event-card {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 日付・ランキングリスト */
+.date-badge {
+  display: inline-block;
+  background: #e8eaf6;
+  color: var(--primary-color);
+  padding: 4px 8px;
+  border-radius: 4px;
   font-size: 12px;
   font-weight: bold;
-  opacity: 0;
-  /* 初期状態は中央に縮小して隠しておく */
-  transform: translate(-50%, -50%) scale(0);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-bottom: 10px;
 }
 
-/* メニュー展開時のアイテム配置の計算 */
-.radial-menu.active .menu-item {
-  opacity: 1;
-  /* 
-    5つのアイテムで半円(180度)を等間隔(45度ずつ)に分割します。
-    -90度からスタートし、それぞれの変数(--i)を掛けて位置を計算します。
-  */
-  transform: 
-    translate(-50%, -50%) 
-    rotate(calc(-90deg + 45deg * var(--i))) 
-    translateY(-110px) 
-    rotate(calc(90deg - 45deg * var(--i))) 
-    scale(1);
+.score-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.score-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+.score-item:last-child { border-bottom: none; }
+.points { font-weight: bold; color: #2e7d32; }
+
+/* 表示切り替えタブ */
+.display-toggle-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.toggle-tab {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  background: #fff;
+  color: var(--primary-color);
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.toggle-tab.active {
+  background: var(--primary-color);
+  color: #fff;
 }
 
-/* -----------------------------
-   半円の背景を追加
------------------------------- */
-.radial-menu::before {
-  content: "";
-  position: absolute;
-  /* メインボタンの中心（64pxの半分）に底辺を合わせる */
-  bottom: 20px;
+/* ナビゲーション */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
   left: 50%;
-  
-  /* メニューアイテムの広がり（110px）を覆うサイズ */
-  width: 240px;  /* 半径140pxの2倍 */
-  height: 120px; /* 半径と同じ高さ */
-  
-  /* ▼▼ ここで半円の色を指定します ▼▼ */
-  background-color: rgba(255, 241, 241, 0.95); /* 少し透ける白 */
-  
-  /* 上半分だけを丸くして半円の形にする */
-  border-radius: 120px 120px 0 0;
-  
-  /* 背景に軽い影をつける */
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-  
-  /* 初期状態はサイズ0で隠しておく */
-  transform: translateX(-50%) scale(0);
-  transform-origin: bottom center; /* 下部中央を起点にアニメーション */
-  transition: transform 0s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* ボタン(z-index:2)やリンク(z-index:1)の後ろに配置 */
-  z-index: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  z-index: 100;
 }
-
-/* メニュー展開時（active時）に半円を広げる */
-.radial-menu.active::before {
-  transform: translateX(-50%) scale(1);
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #888;
+  font-size: 11px;
 }
+.nav-item.active { color: var(--primary-color); font-weight: bold; }
+.nav-icon { font-size: 20px; }

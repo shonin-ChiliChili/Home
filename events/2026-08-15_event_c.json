@@ -1,0 +1,27 @@
+{
+  "eventId": "event_c",
+  "eventName": "怒涛斬魁",
+  "date": "2026-08-15 〜 2026-08-17",
+  "records": [
+    {
+      "userId": "1001",
+      "points": 12341234
+    },
+    {
+      "userId": "1002",
+      "points": 12341
+    },
+    {
+      "userId": "1003",
+      "points": 4123423
+    },
+    {
+      "userId": "1004",
+      "points": 12234123
+    },
+    {
+      "userId": "1005",
+      "points": 1234124
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベントJSON作成ツール</title>
+  <style>
+    :root {
+      --primary-color: #3f51b5;
+      --bg-color: #f4f6f8;
+      --text-main: #333;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    h2, h3 { margin-top: 0; }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    .date-range {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .member-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .member-info {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .member-input {
+      width: 140px !important;
+      text-align: right;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.9;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛠️ イベント成績JSON作成</h2>
+
+  <form id="json-form">
+    <!-- 1. イベント基本情報 -->
+    <div class="card">
+      <h3>1. イベント基本設定</h3>
+
+      <div class="form-group">
+        <label for="event-id">イベントID</label>
+        <input type="text" id="event-id" placeholder="例: event_a" required>
+        <div class="hint">英数字で入力（例: event_a, event_b）</div>
+      </div>
+
+      <div class="form-group">
+        <label for="event-name">イベント名</label>
+        <input type="text" id="event-name" placeholder="例: イベントA (ギルド討伐戦)" required>
+      </div>
+
+      <div class="form-group">
+        <label>開催期間（3日間など）</label>
+        <div class="date-range">
+          <input type="date" id="start-date" required>
+          <span>〜</span>
+          <input type="date" id="end-date" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 個人ポイント入力 -->
+    <div class="card">
+      <h3>2. 参加者ポイント入力</h3>
+      <p class="hint" style="margin-bottom: 15px;">※未アクセスのメンバーは空欄のままで構いません（0ptとしては保存されません）。</p>
+      
+      <div id="members-container">
+        <p>users.json を読み込み中...</p>
+      </div>
+    </div>
+
+    <!-- 3. 出力ボタン -->
+    <button type="submit" class="btn-submit">💾 JSONファイルを保存（ダウンロード）</button>
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const membersContainer = document.getElementById('members-container');
+      const form = document.getElementById('json-form');
+      let usersData = {};
+
+      // users.json の読み込み
+      try {
+        const res = await fetch('users.json');
+        if (!res.ok) throw new Error();
+        usersData = await res.json();
+        renderMemberInputs(usersData);
+      } catch (e) {
+        membersContainer.innerHTML = '<p style="color:red;">users.json の読み込みに失敗しました。Live Server等のローカルサーバーで実行してください。</p>';
+        return;
+      }
+
+      // メンバー入力欄の生成
+      function renderMemberInputs(users) {
+        membersContainer.innerHTML = '';
+        Object.entries(users).forEach(([id, name]) => {
+          const row = document.createElement('div');
+          row.className = 'member-row';
+          row.innerHTML = `
+            <span class="member-info">${name} (${id})</span>
+            <input type="number" class="member-input" data-userid="${id}" placeholder="ptを入力" min="0" step="1">
+          `;
+          membersContainer.appendChild(row);
+        });
+      }
+
+      // フォーム送信（JSON生成・ダウンロード）
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const eventId = document.getElementById('event-id').value.trim();
+        const eventName = document.getElementById('event-name').value.trim();
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
+
+        // 日付フォーマットの生成 (例: "2026-08-10 〜 2026-08-12")
+        const dateString = (startDate === endDate) ? startDate : `${startDate} 〜 ${endDate}`;
+
+        // ポイント入力値の取得
+        const records = [];
+        const inputs = document.querySelectorAll('.member-input');
+        inputs.forEach(input => {
+          const value = input.value.trim();
+          if (value !== '') {
+            records.push({
+              userId: input.getAttribute('data-userid'),
+              points: parseInt(value, 10)
+            });
+          }
+        });
+
+        // 保存用JSONオブジェクト作成
+        const outputJson = {
+          eventId: eventId,
+          eventName: eventName,
+          date: dateString,
+          records: records
+        };
+
+        // ファイルダウンロード処理
+        const fileName = `${startDate}_${eventId}.json`;
+        const blob = new Blob([JSON.stringify(outputJson, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        alert(`『${fileName}』を保存しました！\n\n【次の手順】\n1. ダウンロードしたファイルを events/ フォルダに移動してください。\n2. events.json に "events/${fileName}" を追記してください。`);
+      });
+    });
+  </script>
+</body>
+</html>

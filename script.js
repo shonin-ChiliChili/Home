@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const userName = gameData.users[r.userId] || '不明';
         return `
           <li class="score-item">
-            <span>${userName} (${r.userId})</span>
+            <span>${userName}</span>
             <span class="points">${r.points.toLocaleString()} pt</span>
           </li>
         `;

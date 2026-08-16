@@ -14,9 +14,104 @@
   </header>
 
   <main class="main-content">
-    
-    <!-- ▼ ホーム/イベント一覧画面 ▼ -->
-    <div id="view-home" class="view-section active">
+      <!-- ▼ ホーム画面 ▼ -->
+          <div id="view-home" class="view-section active">
+            <h3 class="section-title">ホーム</h3>
+
+            <!-- 大型メインバナーボタン -->
+            <button class="banner-btn">
+              <span>⚔️ 次回のギルド戦にエントリー</span>
+              <span>＞</span>
+            </button>
+
+            <!-- クイックメニュー（3列グリッド） -->
+            <div class="home-section">
+              <div class="home-section-title">クイックアクセス</div>
+              <div class="btn-grid-3">
+                <button class="action-btn">
+                  <span class="action-btn-icon">📢</span>
+                  <span class="action-btn-label">お知らせ</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">📜</span>
+                  <span class="action-btn-label">デイリー</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">🎁</span>
+                  <span class="action-btn-label">受取箱</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">💬</span>
+                  <span class="action-btn-label">チャット</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">📅</span>
+                  <span class="action-btn-label">予定表</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">📊</span>
+                  <span class="action-btn-label">ランキング</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- コンテンツメニュー（2列グリッド） -->
+            <div class="home-section">
+              <div class="home-section-title">ギルドコンテンツ</div>
+              <div class="btn-grid-2">
+                <button class="action-btn">
+                  <span class="action-btn-icon">🏰</span>
+                  <span class="action-btn-label">拠点戦マップ</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">🐉</span>
+                  <span class="action-btn-label">レイドボス攻略</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">🗡️</span>
+                  <span class="action-btn-label">装備シミュ</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">👑</span>
+                  <span class="action-btn-label">メンバー役職</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- サポート・コミュニティ（2列グリッド） -->
+            <div class="home-section">
+              <div class="home-section-title">サポート・情報</div>
+              <div class="btn-grid-2">
+                <button class="action-btn">
+                  <span class="action-btn-icon">🛡️</span>
+                  <span class="action-btn-label">ギルド規約</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">❓</span>
+                  <span class="action-btn-label">よくある質問</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">📹</span>
+                  <span class="action-btn-label">攻略動画</span>
+                </button>
+                <button class="action-btn">
+                  <span class="action-btn-icon">📞</span>
+                  <span class="action-btn-label">お問い合わせ</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- フル幅ボタン -->
+            <button class="btn-primary" style="width: 100%; padding: 14px; font-size: 15px; margin-top: 10px;">
+              🔄 データを最新に更新する
+            </button>
+
+          </div>
+
+
+
+    <!-- ▼ イベント/イベント一覧画面 ▼ -->
+    <div id="view-event-detail" class="view-section active">
       <h3 class="section-title">開催イベント一覧</h3>
       <div id="event-list-container">
         <!-- JSでイベントカードが自動挿入されます -->
@@ -102,7 +197,7 @@
 
   <!-- 下部固定ナビゲーション -->
   <nav class="bottom-nav">
-    <a href="#" class="nav-item" data-target="char">
+    <a href="#" class="nav-item" data-target="home">
       <span class="nav-icon">🏠</span>
       <span class="nav-label">ホーム</span>
     </a>
@@ -110,7 +205,7 @@
       <span class="nav-icon">🎮</span>
       <span class="nav-label">ミニゲーム</span>
     </a>
-    <a href="#" class="nav-item active" data-target="home">
+    <a href="#" class="nav-item active" data-target="event-detail">
       <span class="nav-icon">🏆</span>
       <span class="nav-label">イベント</span>
     </a>

@@ -145,6 +145,39 @@
   </form>
 
   <script>
+    // 「12.5万」や「1.2億」「125000」などの文字列を数値(整数)に変換する関数
+    function parseJapaneseNumber(str) {
+      if (!str) return 0;
+      // 全角英数字・記号を半角に変換し、カンマを除去
+      let normalized = str.replace(/[Ａ-Ｚａ-ｚ０-９．]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xfee0))
+                          .replace(/,/g, '').trim();
+
+      let total = 0;
+
+      // 「億」の処理
+      if (normalized.includes('億')) {
+        const parts = normalized.split('億');
+        const okuValue = parseFloat(parts[0]) || 0;
+        total += okuValue * 100000000;
+        normalized = parts[1] || '';
+      }
+
+      // 「万」の処理
+      if (normalized.includes('万')) {
+        const parts = normalized.split('万');
+        const manValue = parseFloat(parts[0]) || 0;
+        total += manValue * 10000;
+        normalized = parts[1] || '';
+      }
+
+      // 残りの数値部分を追加
+      if (normalized && !isNaN(parseFloat(normalized))) {
+        total += parseFloat(normalized);
+      }
+
+      return Math.round(total);
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       const membersContainer = document.getElementById('members-container');
       const form = document.getElementById('json-form');
@@ -169,7 +202,7 @@
           row.className = 'member-row';
           row.innerHTML = `
             <span class="member-info">${name} (${id})</span>
-            <input type="number" class="member-input" data-userid="${id}" placeholder="ptを入力" min="0" step="1">
+            <input type="text" class="member-input" data-userid="${id}" placeholder="例: 12.5万 / 125000">
           `;
           membersContainer.appendChild(row);
         });
@@ -195,7 +228,7 @@
           if (value !== '') {
             records.push({
               userId: input.getAttribute('data-userid'),
-              points: parseInt(value, 10)
+              points: parseJapaneseNumber(value)
             });
           }
         });

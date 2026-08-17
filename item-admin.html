@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>課金アイテム管理 - 管理画面</title>
+    <style>
+        :root {
+            --primary-color: #3f51b5;
+            --bg-color: #f4f6f8;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin: 0 0 12px 0;
+            color: var(--primary-color);
+        }
+
+        h4 {
+            font-size: 14px;
+            margin: 15px 0 10px 0;
+            color: var(--text-main);
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-sub);
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #fcfcfc;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+        }
+
+        .pack-section {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .item-section {
+            border: 1px dashed #cbd5e1;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .item-section > div.full-width {
+            grid-column: span 2;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            width: 100%;
+            transition: opacity 0.1s, transform 0.1s;
+        }
+
+        button:active {
+            opacity: 0.85;
+            transform: scale(0.98);
+        }
+
+        .btn-add-pack {
+            background-color: #2e7d32;
+            margin-bottom: 12px;
+        }
+
+        .btn-add-item {
+            background-color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+        .btn-save {
+            background-color: #d32f2f;
+            font-size: 15px;
+            padding: 14px;
+        }
+
+        .btn-remove {
+            background-color: #78909c;
+            padding: 8px;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>課金アイテム登録</h1>
+    
+    <div class="card">
+        <div class="form-group">
+            <label>イベントID (英数字)</label>
+            <input type="text" id="event-id" placeholder="例: summer_event_2026" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+            <label>イベント名 (日本語)</label>
+            <input type="text" id="event-name" placeholder="例: 2026年 夏の特別キャンペーン" required>
+        </div>
+    </div>
+
+    <div id="packs-container"></div>
+
+    <button class="btn-add-pack" onclick="addPack()">+ 新しいパックを追加</button>
+    <button class="btn-save" onclick="saveData()">データを保存してJSONをダウンロード</button>
+</div>
+
+<script>
+    let packCount = 0;
+
+    function addPack() {
+        packCount++;
+        const packId = `pack-${packCount}`;
+        const html = `
+            <div class="pack-section" id="${packId}">
+                <h3>パック情報</h3>
+                <div class="form-group">
+                    <label>パックの名前</label>
+                    <input type="text" class="pack-name" placeholder="例: 初心者応援パックA" required>
+                </div>
+                <div class="form-group">
+                    <label>パックの値段 (円)</label>
+                    <input type="number" class="pack-price" placeholder="例: 1000" required>
+                </div>
+                <h4>アイテム一覧</h4>
+                <div class="items-container"></div>
+                <button class="btn-add-item" onclick="addItem('${packId}')">+ アイテムを追加</button>
+                <button class="btn-remove" onclick="document.getElementById('${packId}').remove()">このパックを削除</button>
+            </div>
+        `;
+        document.getElementById('packs-container').insertAdjacentHTML('beforeend', html);
+        addItem(packId);
+    }
+
+    function addItem(packId) {
+        const itemsContainer = document.querySelector(`#${packId} .items-container`);
+        const html = `
+            <div class="item-section">
+                <div class="full-width">
+                    <label>アイテム名</label>
+                    <input type="text" class="item-name" required>
+                </div>
+                <div>
+                    <label>個数</label>
+                    <input type="number" class="item-count" value="1" min="1" required>
+                </div>
+                <div>
+                    <label>レア度</label>
+                    <select class="item-rarity">
+                        <option value="green">緑 (Normal)</option>
+                        <option value="blue">青 (Rare)</option>
+                        <option value="purple">紫 (Epic)</option>
+                        <option value="orange">オレンジ (Legendary)</option>
+                        <option value="red">赤 (Mythic)</option>
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label>画像URL</label>
+                    <input type="text" class="item-image" placeholder="https://..." required>
+                </div>
+                <div class="full-width">
+                    <button class="btn-remove" onclick="this.parentElement.parentElement.remove()">アイテム削除</button>
+                </div>
+            </div>
+        `;
+        itemsContainer.insertAdjacentHTML('beforeend', html);
+    }
+
+    function saveData() {
+        const eventId = document.getElementById('event-id').value;
+        const eventName = document.getElementById('event-name').value;
+        
+        if (!eventId || !eventName) {
+            alert('イベントIDとイベント名を入力してください。');
+            return;
+        }
+
+        const data = {
+            id: eventId,
+            name: eventName,
+            packs: []
+        };
+
+        document.querySelectorAll('.pack-section').forEach(packElem => {
+            const pack = {
+                name: packElem.querySelector('.pack-name').value,
+                price: parseInt(packElem.querySelector('.pack-price').value),
+                items: []
+            };
+
+            packElem.querySelectorAll('.item-section').forEach(itemElem => {
+                pack.items.push({
+                    name: itemElem.querySelector('.item-name').value,
+                    count: parseInt(itemElem.querySelector('.item-count').value),
+                    rarity: itemElem.querySelector('.item-rarity').value,
+                    imageUrl: itemElem.querySelector('.item-image').value
+                });
+            });
+
+            data.packs.push(pack);
+        });
+
+        let events = JSON.parse(localStorage.getItem('gameEvents') || '{}');
+        events[eventId] = data;
+        localStorage.setItem('gameEvents', JSON.stringify(events));
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${eventId}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        alert('保存し、ダウンロードを開始しました！');
+    }
+
+    window.onload = () => addPack();
+</script>
+</body>
+</html>

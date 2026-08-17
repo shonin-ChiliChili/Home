@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>課金アイテム一覧</title>
+    <style>
+        :root {
+            --primary-color: #3f51b5;
+            --bg-color: #f4f6f8;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .header-controls {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-sub);
+            margin-bottom: 6px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .pack-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        .pack-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pack-name {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .pack-price {
+            font-size: 13px;
+            font-weight: bold;
+            background: #e8eaf6;
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .items-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .item-box {
+            width: 72px;
+            height: 72px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .item-img {
+            width: 85%;
+            height: 70%;
+            object-fit: contain;
+            margin-top: 5%;
+        }
+
+        .item-count-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background-color: rgba(0, 0, 0, 0.55);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* レア度の背景色定義 */
+        .rarity-green  { background: linear-gradient(135deg, #4caf50, #2e7d32); }
+        .rarity-blue   { background: linear-gradient(135deg, #2196f3, #1565c0); }
+        .rarity-purple { background: linear-gradient(135deg, #9c27b0, #6a1b9a); }
+        .rarity-orange { background: linear-gradient(135deg, #ff9800, #ef6c00); }
+        .rarity-red    { background: linear-gradient(135deg, #f44336, #c62828); }
+
+        .no-data {
+            color: var(--text-sub);
+            font-size: 13px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-controls">
+    <label for="event-select">イベント選択</label>
+    <select id="event-select" onchange="renderEvent()">
+        <option value="">-- イベントを選択 --</option>
+    </select>
+</div>
+
+<div id="display-area">
+    <p class="no-data">イベントを選択してください。</p>
+</div>
+
+<script>
+    let eventsData = {};
+
+    window.onload = () => {
+        eventsData = JSON.parse(localStorage.getItem('gameEvents') || '{}');
+        const select = document.getElementById('event-select');
+        
+        for (const [id, data] of Object.entries(eventsData)) {
+            const option = document.createElement('option');
+            option.value = id;
+            option.textContent = data.name;
+            select.appendChild(option);
+        }
+    };
+
+    function renderEvent() {
+        const eventId = document.getElementById('event-select').value;
+        const displayArea = document.getElementById('display-area');
+        
+        if (!eventId) {
+            displayArea.innerHTML = '<p class="no-data">イベントを選択してください。</p>';
+            return;
+        }
+
+        const data = eventsData[eventId];
+        let html = `<h2>${data.name}</h2>`;
+
+        data.packs.forEach(pack => {
+            html += `
+                <div class="pack-card">
+                    <div class="pack-header">
+                        <span class="pack-name">${pack.name}</span>
+                        <span class="pack-price">¥${pack.price.toLocaleString()}</span>
+                    </div>
+                    <div class="items-grid">
+            `;
+
+            pack.items.forEach(item => {
+                html += `
+                    <div class="item-box rarity-${item.rarity}" title="${item.name}">
+                        <img src="${item.imageUrl}" class="item-img" alt="${item.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjYiPk5vIEltZzwvdGV4dD48L3N2Zz4='">
+                        <div class="item-count-overlay">${item.count}</div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+        });
+
+        displayArea.innerHTML = html;
+    }
+</script>
+</body>
+</html>

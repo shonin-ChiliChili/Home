@@ -10,25 +10,25 @@
           "name": "志願令",
           "count": 3,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "資質薬",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "珍獣の実",
           "count": 10,
           "rarity": "purple",
-          "imageUrl": "item--img/珍獣の実.webp"
+          "imageUrl": "item-img/珍獣の実.webp"
         },
         {
           "name": "香木かんざし",
           "count": 1,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         }
       ]
     },

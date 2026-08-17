@@ -167,10 +167,36 @@
 <script>
     let eventsData = {};
 
-    window.onload = () => {
-        eventsData = JSON.parse(localStorage.getItem('gameEvents') || '{}');
+    window.onload = async () => {
         const select = document.getElementById('event-select');
         
+        // 1. 管理画面(item-admin.html)で一時保存したLocalStorageのデータを取得
+        eventsData = JSON.parse(localStorage.getItem('gameEvents') || '{}');
+
+        // 2. item-json/list.json からファイル一覧を取得して JSON ファイルを読み込む
+        try {
+            const listRes = await fetch('item-json/list.json');
+            if (listRes.ok) {
+                const fileList = await listRes.json();
+                
+                for (const fileName of fileList) {
+                    // パスの自動補正
+                    const path = fileName.startsWith('item-json/') ? fileName : `item-json/${fileName}`;
+                    const eventRes = await fetch(path);
+                    if (eventRes.ok) {
+                        const data = await eventRes.json();
+                        if (data && data.id) {
+                            eventsData[data.id] = data; // データを格納
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.log('item-json/list.json の読み込みをスキップしました');
+        }
+
+        // セレクトボックスに選択肢をセット
+        select.innerHTML = '<option value="">-- イベントを選択 --</option>';
         for (const [id, data] of Object.entries(eventsData)) {
             const option = document.createElement('option');
             option.value = id;
@@ -202,9 +228,15 @@
             `;
 
             pack.items.forEach(item => {
+                // 画像パスに item-img/ が付いていない場合は自動で付与
+                let imgPath = item.imageUrl || '';
+                if (imgPath && !imgPath.startsWith('http') && !imgPath.startsWith('item-img/')) {
+                    imgPath = 'item-img/' + imgPath;
+                }
+
                 html += `
                     <div class="item-box rarity-${item.rarity}" title="${item.name}">
-                        <img src="${item.imageUrl}" class="item-img" alt="${item.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjYiPk5vIEltZzwvdGV4dD48L3N2Zz4='">
+                        <img src="${imgPath}" class="item-img" alt="${item.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjYiPk5vIEltZzwvdGV4dD48L3N2Zz4='">
                         <div class="item-count-overlay">${item.count}</div>
                     </div>
                 `;

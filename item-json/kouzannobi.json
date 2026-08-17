@@ -1,0 +1,306 @@
+{
+  "id": "kouzannobi",
+  "name": "黄山の美",
+  "packs": [
+    {
+      "name": "黄山の美お助けパック",
+      "price": 160,
+      "items": [
+        {
+          "name": "観光案内",
+          "count": 3,
+          "rarity": "purple",
+          "imageUrl": "item-img/観光案内.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 4,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "花容箱",
+          "count": 5,
+          "rarity": "orange",
+          "imageUrl": "item-img/花容箱.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 10,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        }
+      ]
+    },
+    {
+      "name": "黄山の美謳歌パック",
+      "price": 800,
+      "items": [
+        {
+          "name": "観光案内",
+          "count": 9,
+          "rarity": "purple",
+          "imageUrl": "item-img/観光案内.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 11,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "銅の簪",
+          "count": 15,
+          "rarity": "purple",
+          "imageUrl": "item-img/銅の簪.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 25,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "花容箱",
+          "count": 10,
+          "rarity": "orange",
+          "imageUrl": "item-img/花容箱.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 15,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 30,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "活力薬",
+          "count": 300,
+          "rarity": "blue",
+          "imageUrl": "item-img/活力薬.webp"
+        }
+      ]
+    },
+    {
+      "name": "黄山の美進級パック",
+      "price": 1600,
+      "items": [
+        {
+          "name": "観光案内",
+          "count": 15,
+          "rarity": "purple",
+          "imageUrl": "item-img/観光案内.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 12,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "銅の簪",
+          "count": 15,
+          "rarity": "purple",
+          "imageUrl": "item-img/銅の簪.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 25,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "花容箱",
+          "count": 12,
+          "rarity": "orange",
+          "imageUrl": "item-img/花容箱.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 15,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 30,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "活力薬",
+          "count": 300,
+          "rarity": "blue",
+          "imageUrl": "item-img/活力薬.webp"
+        }
+      ]
+    },
+    {
+      "name": "黄山の美豪華パック",
+      "price": 4800,
+      "items": [
+        {
+          "name": "観光案内",
+          "count": 32,
+          "rarity": "purple",
+          "imageUrl": "item-img/観光案内.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 20,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "銅の簪",
+          "count": 55,
+          "rarity": "purple",
+          "imageUrl": "item-img/銅の簪.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 140,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "花容箱",
+          "count": 18,
+          "rarity": "orange",
+          "imageUrl": "item-img/花容箱.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 45,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 120,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "活力薬",
+          "count": 1900,
+          "rarity": "blue",
+          "imageUrl": "item-img/活力薬.webp"
+        }
+      ]
+    },
+    {
+      "name": "黄山の美驚愕パック",
+      "price": 8000,
+      "items": [
+        {
+          "name": "観光案内",
+          "count": 46,
+          "rarity": "purple",
+          "imageUrl": "item-img/観光案内.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 40,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "銅の簪",
+          "count": 110,
+          "rarity": "purple",
+          "imageUrl": "item-img/銅の簪.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 300,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "花容箱",
+          "count": 40,
+          "rarity": "orange",
+          "imageUrl": "item-img/花容箱.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 105,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 300,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "活力薬",
+          "count": 3100,
+          "rarity": "blue",
+          "imageUrl": "item-img/活力薬.webp"
+        }
+      ]
+    },
+    {
+      "name": "黄山の美無限パック",
+      "price": 15800,
+      "items": [
+        {
+          "name": "観光案内",
+          "count": 87,
+          "rarity": "purple",
+          "imageUrl": "item-img/観光案内.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 70,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "銅の簪",
+          "count": 220,
+          "rarity": "purple",
+          "imageUrl": "item-img/銅の簪.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 600,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "花容箱",
+          "count": 70,
+          "rarity": "orange",
+          "imageUrl": "item-img/花容箱.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 220,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 600,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "活力薬",
+          "count": 6500,
+          "rarity": "blue",
+          "imageUrl": "item-img/活力薬.webp"
+        }
+      ]
+    }
+  ]
+}

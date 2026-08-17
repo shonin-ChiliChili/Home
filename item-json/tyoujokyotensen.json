@@ -40,25 +40,25 @@
           "name": "志願令",
           "count": 8,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 3,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         }
       ]
     },
@@ -70,25 +70,25 @@
           "name": "志願令",
           "count": 15,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 5,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         }
       ]
     },
@@ -100,49 +100,49 @@
           "name": "志願令",
           "count": 20,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 3,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 8,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         },
         {
           "name": "ランダム書籍",
           "count": 100,
           "rarity": "blue",
-          "imageUrl": "item--img/ランダム書籍.webp"
+          "imageUrl": "item-img/ランダム書籍.webp"
         },
         {
           "name": "市井手帳",
           "count": 100,
           "rarity": "purple",
-          "imageUrl": "item--img/市井手帳.webp"
+          "imageUrl": "item-img/市井手帳.webp"
         },
         {
           "name": "珍宝箱",
           "count": 2,
           "rarity": "purple",
-          "imageUrl": "item--img/珍宝箱.webp"
+          "imageUrl": "item-img/珍宝箱.webp"
         },
         {
           "name": "算盤",
           "count": 4,
           "rarity": "blue",
-          "imageUrl": "item--img/算盤.webp"
+          "imageUrl": "item-img/算盤.webp"
         }
       ]
     },
@@ -154,49 +154,49 @@
           "name": "志願令",
           "count": 40,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 3,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 5,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 15,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         },
         {
           "name": "金歩揺",
           "count": 4,
           "rarity": "red",
-          "imageUrl": "item--img/金歩揺.webp"
+          "imageUrl": "item-img/金歩揺.webp"
         },
         {
           "name": "市井手帳",
           "count": 200,
           "rarity": "purple",
-          "imageUrl": "item--img/市井手帳.webp"
+          "imageUrl": "item-img/市井手帳.webp"
         },
         {
           "name": "珍宝箱",
           "count": 5,
           "rarity": "purple",
-          "imageUrl": "item--img/珍宝箱.webp"
+          "imageUrl": "item-img/珍宝箱.webp"
         },
         {
           "name": "算盤",
           "count": 8,
           "rarity": "blue",
-          "imageUrl": "item--img/算盤.webp"
+          "imageUrl": "item-img/算盤.webp"
         }
       ]
     },
@@ -208,49 +208,49 @@
           "name": "志願令",
           "count": 70,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 5,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 10,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 25,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         },
         {
           "name": "金歩揺",
           "count": 6,
           "rarity": "red",
-          "imageUrl": "item--img/金歩揺.webp"
+          "imageUrl": "item-img/金歩揺.webp"
         },
         {
           "name": "市井手帳",
           "count": 400,
           "rarity": "purple",
-          "imageUrl": "item--img/市井手帳.webp"
+          "imageUrl": "item-img/市井手帳.webp"
         },
         {
           "name": "珍宝箱",
           "count": 10,
           "rarity": "purple",
-          "imageUrl": "item--img/珍宝箱.webp"
+          "imageUrl": "item-img/珍宝箱.webp"
         },
         {
           "name": "算盤",
           "count": 16,
           "rarity": "blue",
-          "imageUrl": "item--img/算盤.webp"
+          "imageUrl": "item-img/算盤.webp"
         }
       ]
     },
@@ -262,49 +262,49 @@
           "name": "雷霆の針",
           "count": 1,
           "rarity": "red",
-          "imageUrl": "item--img/雷霆の針.webp"
+          "imageUrl": "item-img/雷霆の針.webp"
         },
         {
           "name": "志願令",
           "count": 52,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 3,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 20,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 25,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         },
         {
           "name": "金歩揺",
           "count": 6,
           "rarity": "red",
-          "imageUrl": "item--img/金歩揺.webp"
+          "imageUrl": "item-img/金歩揺.webp"
         },
         {
           "name": "市井手帳",
           "count": 500,
           "rarity": "purple",
-          "imageUrl": "item--img/市井手帳.webp"
+          "imageUrl": "item-img/市井手帳.webp"
         },
         {
           "name": "珍宝箱",
           "count": 10,
           "rarity": "purple",
-          "imageUrl": "item--img/珍宝箱.webp"
+          "imageUrl": "item-img/珍宝箱.webp"
         }
       ]
     },
@@ -316,49 +316,49 @@
           "name": "志願令",
           "count": 140,
           "rarity": "purple",
-          "imageUrl": "item--img/志願令.webp"
+          "imageUrl": "item-img/志願令.webp"
         },
         {
           "name": "一擲千金",
           "count": 8,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 30,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 50,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         },
         {
           "name": "金歩揺",
           "count": 12,
           "rarity": "red",
-          "imageUrl": "item--img/金歩揺.webp"
+          "imageUrl": "item-img/金歩揺.webp"
         },
         {
           "name": "市井手帳",
           "count": 1200,
           "rarity": "purple",
-          "imageUrl": "item--img/市井手帳.webp"
+          "imageUrl": "item-img/市井手帳.webp"
         },
         {
           "name": "珍宝箱",
           "count": 20,
           "rarity": "purple",
-          "imageUrl": "item--img/珍宝箱.webp"
+          "imageUrl": "item-img/珍宝箱.webp"
         },
         {
           "name": "算盤",
           "count": 32,
           "rarity": "blue",
-          "imageUrl": "item--img/算盤.webp"
+          "imageUrl": "item-img/算盤.webp"
         }
       ]
     },
@@ -370,43 +370,43 @@
           "name": "一擲千金",
           "count": 10,
           "rarity": "red",
-          "imageUrl": "item--img/一擲千金.webp"
+          "imageUrl": "item-img/一擲千金.webp"
         },
         {
           "name": "資質薬",
           "count": 120,
           "rarity": "red",
-          "imageUrl": "item--img/資質薬.webp"
+          "imageUrl": "item-img/資質薬.webp"
         },
         {
           "name": "香木かんざし",
           "count": 50,
           "rarity": "orange",
-          "imageUrl": "item--img/香木かんざし.webp"
+          "imageUrl": "item-img/香木かんざし.webp"
         },
         {
           "name": "金歩揺",
           "count": 12,
           "rarity": "red",
-          "imageUrl": "item--img/金歩揺.webp"
+          "imageUrl": "item-img/金歩揺.webp"
         },
         {
           "name": "市井手帳",
           "count": 1200,
           "rarity": "purple",
-          "imageUrl": "item--img/市井手帳.webp"
+          "imageUrl": "item-img/市井手帳.webp"
         },
         {
           "name": "珍宝箱",
           "count": 20,
           "rarity": "purple",
-          "imageUrl": "item--img/珍宝箱.webp"
+          "imageUrl": "item-img/珍宝箱.webp"
         },
         {
           "name": "算盤",
           "count": 32,
           "rarity": "blue",
-          "imageUrl": "item--img/算盤.webp"
+          "imageUrl": "item-img/算盤.webp"
         }
       ]
     }

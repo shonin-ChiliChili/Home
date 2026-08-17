@@ -1,0 +1,114 @@
+{
+  "id": "yorokobihinabe",
+  "name": "喜び火鍋",
+  "packs": [
+    {
+      "name": "火鍋お助けパック",
+      "price": 160,
+      "items": [
+        {
+          "name": "仕入れ請状",
+          "count": 3,
+          "rarity": "purple",
+          "imageUrl": "item-img/仕入れ請状.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 5,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 14,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 36,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 36,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        }
+      ]
+    },
+    {
+      "name": "火鍋謳歌パック",
+      "price": 800,
+      "items": [
+        {
+          "name": "仕入れ請状",
+          "count": 12,
+          "rarity": "purple",
+          "imageUrl": "item-img/仕入れ請状.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 28,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 40,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 110,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 110,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        }
+      ]
+    },
+    {
+      "name": "火鍋進級パック",
+      "price": 1600,
+      "items": [
+        {
+          "name": "仕入れ請状",
+          "count": 22,
+          "rarity": "purple",
+          "imageUrl": "item-img/仕入れ請状.webp"
+        },
+        {
+          "name": "銀の耳飾",
+          "count": 44,
+          "rarity": "orange",
+          "imageUrl": "item-img/銀の耳飾.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 50,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        },
+        {
+          "name": "木の櫛",
+          "count": 100,
+          "rarity": "blue",
+          "imageUrl": "item-img/木の櫛.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 100,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,336 @@
+{
+  "id": "event_kokuhutoride",
+  "name": "黒風砦",
+  "packs": [
+    {
+      "name": "黒風砦お助けパック",
+      "price": 160,
+      "items": [
+        {
+          "name": "仙豆",
+          "count": 1,
+          "rarity": "purple",
+          "imageUrl": "item-img/仙豆.webp"
+        },
+        {
+          "name": "資質薬",
+          "count": 1,
+          "rarity": "red",
+          "imageUrl": "item-img/資質薬.webp"
+        },
+        {
+          "name": "珍獣の実",
+          "count": 10,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍獣の実.webp"
+        },
+        {
+          "name": "ランダム書籍",
+          "count": 50,
+          "rarity": "blue",
+          "imageUrl": "item-img/ランダム書籍.webp"
+        },
+        {
+          "name": "市井手帳",
+          "count": 50,
+          "rarity": "purple",
+          "imageUrl": "item-img/市井手帳.webp"
+        },
+        {
+          "name": "人参",
+          "count": 1,
+          "rarity": "purple",
+          "imageUrl": "item-img/人参.webp"
+        },
+        {
+          "name": "珍宝箱",
+          "count": 5,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍宝箱.webp"
+        },
+        {
+          "name": "算盤",
+          "count": 10,
+          "rarity": "blue",
+          "imageUrl": "item-img/算盤.webp"
+        }
+      ]
+    },
+    {
+      "name": "黒風砦謳歌パック",
+      "price": 800,
+      "items": [
+        {
+          "name": "仙豆",
+          "count": 2,
+          "rarity": "purple",
+          "imageUrl": "item-img/仙豆.webp"
+        },
+        {
+          "name": "月華水",
+          "count": 360,
+          "rarity": "orange",
+          "imageUrl": "item-img/月華水.webp"
+        },
+        {
+          "name": "資質薬",
+          "count": 2,
+          "rarity": "red",
+          "imageUrl": "item-img/資質薬.webp"
+        },
+        {
+          "name": "珍獣の実",
+          "count": 20,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍獣の実.webp"
+        },
+        {
+          "name": "ランダム書籍",
+          "count": 100,
+          "rarity": "blue",
+          "imageUrl": "item-img/ランダム書籍.webp"
+        },
+        {
+          "name": "市井手帳",
+          "count": 100,
+          "rarity": "purple",
+          "imageUrl": "item-img/市井手帳.webp"
+        },
+        {
+          "name": "人参",
+          "count": 3,
+          "rarity": "purple",
+          "imageUrl": "item-img/人参.webp"
+        },
+        {
+          "name": "算盤",
+          "count": 40,
+          "rarity": "blue",
+          "imageUrl": "item-img/算盤.webp"
+        }
+      ]
+    },
+    {
+      "name": "黒風砦収穫パック",
+      "price": 2400,
+      "items": [
+        {
+          "name": "仙豆",
+          "count":3,
+          "rarity": "purple",
+          "imageUrl": "item-img/仙豆.webp"
+        },
+        {
+          "name": "月華水",
+          "count": 540,
+          "rarity": "orange",
+          "imageUrl": "item-img/月華水.webp"
+        },
+        {
+          "name": "資質薬",
+          "count": 10,
+          "rarity": "red",
+          "imageUrl": "item-img/資質薬.webp"
+        },
+        {
+          "name": "珍獣の実",
+          "count": 100,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍獣の実.webp"
+        },
+        {
+          "name": "ランダム書籍",
+          "count": 300,
+          "rarity": "blue",
+          "imageUrl": "item-img/ランダム書籍.webp"
+        },
+        {
+          "name": "市井手帳",
+          "count": 300,
+          "rarity": "purple",
+          "imageUrl": "item-img/市井手帳.webp"
+        },
+        {
+          "name": "人参",
+          "count": 8,
+          "rarity": "purple",
+          "imageUrl": "item-img/人参.webp"
+        },
+        {
+          "name": "算盤",
+          "count":80,
+          "rarity": "blue",
+          "imageUrl": "item-img/算盤.webp"
+        }
+      ]
+    },
+    {
+      "name": "黒風砦豪華パック",
+      "price": 4800,
+      "items": [
+        {
+          "name": "仙豆",
+          "count": 6,
+          "rarity": "purple",
+          "imageUrl": "item-img/仙豆.webp"
+        },
+        {
+          "name": "月華水",
+          "count": 1080,
+          "rarity": "orange",
+          "imageUrl": "item-img/月華水.webp"
+        },
+        {
+          "name": "資質薬",
+          "count": 22,
+          "rarity": "red",
+          "imageUrl": "item-img/資質薬.webp"
+        },
+        {
+          "name": "珍獣の実",
+          "count": 220,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍獣の実.webp"
+        },
+        {
+          "name": "ランダム書籍",
+          "count": 600,
+          "rarity": "blue",
+          "imageUrl": "item-img/ランダム書籍.webp"
+        },
+        {
+          "name": "市井手帳",
+          "count": 600,
+          "rarity": "purple",
+          "imageUrl": "item-img/市井手帳.webp"
+        },
+        {
+          "name": "人参",
+          "count": 15,
+          "rarity": "purple",
+          "imageUrl": "item-img/人参.webp"
+        },
+        {
+          "name": "算盤",
+          "count": 150,
+          "rarity": "blue",
+          "imageUrl": "item-img/算盤.webp"
+        }
+      ]
+    },
+    {
+      "name": "黒風砦驚愕パック",
+      "price": 8000,
+      "items": [
+        {
+          "name": "仙豆",
+          "count": 13,
+          "rarity": "purple",
+          "imageUrl": "item-img/仙豆.webp"
+        },
+        {
+          "name": "月華水",
+          "count": 2340,
+          "rarity": "orange",
+          "imageUrl": "item-img/月華水.webp"
+        },
+        {
+          "name": "資質薬",
+          "count": 40,
+          "rarity": "red",
+          "imageUrl": "item-img/資質薬.webp"
+        },
+        {
+          "name": "珍獣の実",
+          "count": 400,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍獣の実.webp"
+        },
+        {
+          "name": "ランダム書籍",
+          "count": 800,
+          "rarity": "blue",
+          "imageUrl": "item-img/ランダム書籍.webp"
+        },
+        {
+          "name": "市井手帳",
+          "count": 800,
+          "rarity": "purple",
+          "imageUrl": "item-img/市井手帳.webp"
+        },
+        {
+          "name": "人参",
+          "count": 25,
+          "rarity": "purple",
+          "imageUrl": "item-img/人参.webp"
+        },
+        {
+          "name": "",
+          "count": 1,
+          "rarity": "green",
+          "imageUrl": ""
+        },
+        {
+          "name": "算盤",
+          "count": 200,
+          "rarity": "blue",
+          "imageUrl": "item-img/算盤.webp"
+        }
+      ]
+    },
+    {
+      "name": "黒風砦無限パック",
+      "price": 15800,
+      "items": [
+        {
+          "name": "仙豆",
+          "count": 25,
+          "rarity": "purple",
+          "imageUrl": "item-img/仙豆.webp"
+        },
+        {
+          "name": "月華水",
+          "count": 4500,
+          "rarity": "orange",
+          "imageUrl": "item-img/月華水.webp"
+        },
+        {
+          "name": "資質薬",
+          "count": 70,
+          "rarity": "red",
+          "imageUrl": "item-img/資質薬.webp"
+        },
+        {
+          "name": "珍獣の実",
+          "count": 700,
+          "rarity": "purple",
+          "imageUrl": "item-img/珍獣の実.webp"
+        },
+        {
+          "name": "ランダム書籍",
+          "count": 2200,
+          "rarity": "blue",
+          "imageUrl": "item-img/ランダム書籍.webp"
+        },
+        {
+          "name": "市井手帳",
+          "count": 2200,
+          "rarity": "purple",
+          "imageUrl": "item-img/市井手帳.webp"
+        },
+        {
+          "name": "人参",
+          "count": 60,
+          "rarity": "purple",
+          "imageUrl": "item-img/人参.webp"
+        },
+        {
+          "name": "算盤",
+          "count": 400,
+          "rarity": "blue",
+          "imageUrl": "item-img/算盤.webp"
+        }
+      ]
+    }
+  ]
+}

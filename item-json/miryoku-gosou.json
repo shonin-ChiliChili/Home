@@ -1,0 +1,258 @@
+{
+  "id": "miryoku",
+  "name": "限定番付-魅力",
+  "packs": [
+    {
+      "name": "魅力護送白銀パック",
+      "price": 320,
+      "items": [
+        {
+          "name": "銀の馬符",
+          "count": 1,
+          "rarity": "purple",
+          "imageUrl": "item-img/銀の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 2,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 140,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 40,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送黄金パック",
+      "price": 480,
+      "items": [
+        {
+          "name": "銀の馬符",
+          "count": 2,
+          "rarity": "purple",
+          "imageUrl": "item-img/銀の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 4,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 200,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 60,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送白金パック",
+      "price": 800,
+      "items": [
+        {
+          "name": "銀の馬符",
+          "count": 3,
+          "rarity": "purple",
+          "imageUrl": "item-img/銀の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 4,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 380,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 120,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送金剛パック",
+      "price": 1600,
+      "items": [
+        {
+          "name": "金の馬符",
+          "count": 1,
+          "rarity": "orange",
+          "imageUrl": "item-img/金の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 6,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 800,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 300,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送至尊パック",
+      "price": 2400,
+      "items": [
+        {
+          "name": "金の馬符",
+          "count": 1,
+          "rarity": "orange",
+          "imageUrl": "item-img/金の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 8,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 1400,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 400,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送非凡パック",
+      "price": 4800,
+      "items": [
+        {
+          "name": "金の馬符",
+          "count": 2,
+          "rarity": "orange",
+          "imageUrl": "item-img/金の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 12,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 1600,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 600,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送金光パック",
+      "price": 8000,
+      "items": [
+        {
+          "name": "元宝",
+          "count": 4390,
+          "rarity": "orange",
+          "imageUrl": "item-img/元宝.webp"
+        },
+        {
+          "name": "金の馬符",
+          "count": 3,
+          "rarity": "orange",
+          "imageUrl": "item-img/金の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 16,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 3000,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 800,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    },
+    {
+      "name": "魅力護送王者パック",
+      "price": 15800,
+      "items": [
+        {
+          "name": "元宝",
+          "count": 8640,
+          "rarity": "orange",
+          "imageUrl": "item-img/元宝.webp"
+        },
+        {
+          "name": "金の馬符",
+          "count": 6,
+          "rarity": "orange",
+          "imageUrl": "item-img/金の馬符.webp"
+        },
+        {
+          "name": "急行令",
+          "count": 24,
+          "rarity": "purple",
+          "imageUrl": "item-img/急行令.webp"
+        },
+        {
+          "name": "頬紅",
+          "count": 6000,
+          "rarity": "blue",
+          "imageUrl": "item-img/頬紅.webp"
+        },
+        {
+          "name": "匂い袋",
+          "count": 1600,
+          "rarity": "purple",
+          "imageUrl": "item-img/匂い袋.webp"
+        }
+      ]
+    }
+  ]
+}

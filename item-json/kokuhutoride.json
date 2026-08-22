@@ -265,12 +265,6 @@
           "imageUrl": "item-img/人参.webp"
         },
         {
-          "name": "",
-          "count": 1,
-          "rarity": "green",
-          "imageUrl": ""
-        },
-        {
           "name": "算盤",
           "count": 200,
           "rarity": "blue",

@@ -120,32 +120,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function showEventDetail(event) {
-    detailEventTitle.textContent = event.name;
-    eventHistoryContainer.innerHTML = '';
+      detailEventTitle.textContent = event.name;
+      eventHistoryContainer.innerHTML = '';
 
-    event.history.forEach(h => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      
-      let rowsHtml = h.records.map(r => {
-        const userName = gameData.users[r.userId] || '不明';
-        return `
-          <li class="score-item">
-            <span>${userName}</span>
-            <span class="points">${formatPoints(r.points)}</span>
-          </li>
+      event.history.forEach(h => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        // ▼ ポイントの高い順（降順）にソートする処理を追加
+        const sortedRecords = [...h.records].sort((a, b) => b.points - a.points);
+
+        let rowsHtml = sortedRecords.map(r => {
+          const userName = gameData.users[r.userId] || '不明';
+          return `
+            <li class="score-item">
+              <span>${userName}</span>
+              <span class="points">${formatPoints(r.points)}</span>
+            </li>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <span class="date-badge">開催日: ${h.date}</span>
+          <ul class="score-list">${rowsHtml}</ul>
         `;
-      }).join('');
+        eventHistoryContainer.appendChild(card);
+      });
 
-      card.innerHTML = `
-        <span class="date-badge">開催日: ${h.date}</span>
-        <ul class="score-list">${rowsHtml}</ul>
-      `;
-      eventHistoryContainer.appendChild(card);
-    });
-
-    switchView('event-detail');
-  }
+      switchView('event-detail');
+    }
 
   document.getElementById('back-to-events-btn').addEventListener('click', () => {
     switchView('home');

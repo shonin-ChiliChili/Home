@@ -178,26 +178,34 @@
       return Math.round(total);
     }
 
-    document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
       const membersContainer = document.getElementById('members-container');
       const form = document.getElementById('json-form');
-      let usersData = {};
 
-      // users.json の読み込み
+      // users.json の読み込み（記述順を保持するためテキストとして取得してパース）
       try {
         const res = await fetch('users.json');
         if (!res.ok) throw new Error();
-        usersData = await res.json();
-        renderMemberInputs(usersData);
+        
+        const text = await res.text();
+        // JSONテキストから "キー": "値" の定義順を正規表現で抽出
+        const userEntries = [];
+        const regex = /"(\d+)":\s*"([^"]+)"/g;
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+          userEntries.push([match[1], match[2]]);
+        }
+
+        renderMemberInputs(userEntries);
       } catch (e) {
         membersContainer.innerHTML = '<p style="color:red;">users.json の読み込みに失敗しました。Live Server等のローカルサーバーで実行してください。</p>';
         return;
       }
 
       // メンバー入力欄の生成
-      function renderMemberInputs(users) {
+      function renderMemberInputs(userEntries) {
         membersContainer.innerHTML = '';
-        Object.entries(users).forEach(([id, name]) => {
+        userEntries.forEach(([id, name]) => {
           const row = document.createElement('div');
           row.className = 'member-row';
           row.innerHTML = `
@@ -207,7 +215,7 @@
           membersContainer.appendChild(row);
         });
       }
-
+      
       // フォーム送信（JSON生成・ダウンロード）
       form.addEventListener('submit', (e) => {
         e.preventDefault();

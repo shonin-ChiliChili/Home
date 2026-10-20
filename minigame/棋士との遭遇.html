@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#152438">
-<title>棋士との遭遇｜攻略サポート</title>
+<meta name="theme-color" content="#df4451">
+<title>🌶️ 棋士との遭遇｜Chili²商会</title>
 <style>
   :root {
     --navy:#152438; --navy2:#263b55; --blue:#2166dc; --blue-pale:#e8f1ff;
@@ -99,13 +99,104 @@
   @keyframes pulse{50%{box-shadow:0 0 0 5px #f0b44f55}}
   @media(max-width:370px){.container{padding:12px 9px 30px}.panel{padding:12px}.board-panel{padding:9px}.board-frame{padding:5px}.tray{gap:6px}.chip{min-height:58px}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
+
+  /* ========== 🌶 Chili²商会：スマホ優先のあたたかいデザイン ========== */
+  :root{
+    --chili:#e34652;--chili-deep:#b92242;--chili-soft:#fff0ec;
+    --navy:#a71e37;--navy2:#2664a8;
+    --red:#d93847;--red-pale:#fff0f1;
+    --bg:#fff8f5;--ink:#462c34;--muted:#8a6970;--border:#f3dcda;
+    --white:#fff;--line:#bba992;
+  }
+  html{scroll-behavior:auto}
+  body{
+    background: radial-gradient(circle at 8px 9px,#fceae6 1px,transparent 1.5px) 0 0/26px 26px,var(--bg);
+    -webkit-text-size-adjust:100%;
+  }
+  .topbar{
+    background:linear-gradient(120deg,#f45b61 0%,#e54154 62%,#c82c4c 100%);
+    padding:15px max(15px,env(safe-area-inset-left));
+    box-shadow:0 3px 16px #d9414d25;
+    border-radius:0 0 21px 21px;
+  }
+  .brand{font-size:clamp(19px,4.7vw,25px);letter-spacing:.01em;text-shadow:0 1px 1px #7d142228}
+  .brand small{color:#ffe9e9;font-size:11px}
+  .help-btn{background:#ffffff2f;border:1px solid #ffffff88;border-radius:30px;font-size:13px;padding:9px 13px}
+  .container{padding-top:15px}
+  .panel,.tutorial{background:#fff;border-color:var(--border);border-radius:21px;box-shadow:0 5px 16px #b6444b0d}
+  .tutorial{border:2px solid #fac7cd;background:linear-gradient(180deg,#fff,#fff9f6)}
+  .eyebrow{color:var(--chili-deep)}
+  .progress span{background:#f8e4e1}
+  .progress span.done{background:var(--chili)}
+  .tutorial h2{color:#9d2a3e}
+  .tutorial p{color:#705760}
+  .tutorial .instruction{background:#fff0ed;color:#9a2940;border:1px solid #f7d9d1}
+  .skip-btn{background:#fcece9;color:#ae4051;border:1px solid #f8dad7;border-radius:25px}
+  .panel-title{color:#893b46;font-size:16px;margin-bottom:9px}
+  .phase{background:#fff0ec;color:#bf4255;padding:6px 9px;font-size:11px}
+  .status{background:#fff4ec;border:1px solid #fae1d3;color:#77504a;
+    height:87px;min-height:87px;overflow-y:auto;overscroll-behavior:contain;
+    padding:10px 12px;margin-bottom:10px;font-size:13px}
+  .status.success{background:#eefaf3;border-color:#d2f1e1;color:#247653}
+  .status.warn{background:#fff3df;border-color:#f6dfb6;color:#a36528}
+  .hint{font-size:12px;margin-bottom:8px}
+  .tray{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:10px}
+  .chip{border:1px solid #f0d9cf;background:#fffaf6;color:#754c43;
+    border-radius:13px;min-height:57px;padding:5px 0;gap:2px;font-size:12px;
+    box-shadow:inset 0 -2px #f6e8e1}
+  .chip .symbol{font-size:21px}
+  .chip[aria-pressed="true"]{border:2px solid var(--chili);background:#ffeff0;color:#a5263c;box-shadow:0 0 0 2px #e3465220}
+  .chip:disabled:not([aria-pressed="true"]){opacity:.48}
+  .actions{display:grid;grid-template-columns:1fr;gap:7px}
+  .utility-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .primary{background:linear-gradient(100deg,#f05460,#dc344c);color:#fff;border-radius:13px;
+    box-shadow:0 3px 0 #ad2b40;min-height:47px;font-size:14px}
+  .primary:disabled{box-shadow:none;background:#f4cad0;color:#a4646d;opacity:1}
+  .secondary{min-height:42px;border-radius:12px;background:#fff5f1;border:1px solid #f5dcda;color:#9a5360;font-size:13px}
+  .delete-selected{width:100%;margin-top:0;min-height:42px;font-size:13px;color:#b73043;background:#ffeff0;border-color:#f8d3d7}
+  .delete-selected:disabled{opacity:.45;background:#f9f2f0;color:#9d8387}
+  .board-panel{border-color:#f2d9d6}
+  .board-top{padding:1px 4px 10px}
+  .board-top strong{color:#803849}
+  .capture-pill{display:inline-flex;gap:6px;align-items:center;border-radius:30px;background:#fff2e8;
+    color:#a34a4e;padding:5px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+  .capture-pill strong{font-size:17px;color:#b52d44}
+  .legend{background:#fff8f4;border:1px solid #f6e6dc;font-size:11.5px;padding:8px 9px;gap:8px}
+  .board-frame{background:#fff8e9;border:2px solid #edd5bb;border-radius:17px;
+    box-shadow:inset 0 1px 9px #b9915b12}
+  .piece.self{background:linear-gradient(145deg,#418bdd,#215aa8);color:#fff;border:2px solid #1b509b;box-shadow:0 2px 7px #183b5d39}
+  .piece.enemy{background:#fffefa;border:2px solid #dec6ae}
+  .piece.selected{outline:3px solid #ea9d35;outline-offset:1px;box-shadow:0 0 0 6px #efc37555}
+  .board-note{color:#9b7880;margin:9px 0 0}
+  .skill{background:#fff9ef;color:#845d47;border:1px solid #f4dfc2;border-radius:13px;margin-top:13px}
+  .skill.active{background:#fff2cb;border-color:#f2cd6b;color:#85540c}
+  .tiny-help{color:#947880;margin:10px 1px 0}
+  @media(max-width:769px){
+    .container{max-width:540px;padding-left:11px;padding-right:11px}
+    .panel{padding:13px}
+    .board-panel{padding:11px}
+    .workspace{gap:12px}
+  }
+  @media(max-width:370px){
+    .container{padding-left:8px;padding-right:8px}
+    .panel{padding:10px}
+    .tray{gap:3px}
+    .chip{min-height:54px;font-size:11px}
+    .chip .symbol{font-size:19px}
+    .brand{font-size:18px}
+    .help-btn{padding:8px 10px;font-size:12px}
+  }
+  @media(min-width:770px){
+    .tray{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .chip{min-height:62px;font-size:14px}
+  }
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="top-inner">
-    <div class="brand">♟️ 棋士との遭遇 <small>盤面を再現して、安全な移動先を確認</small></div>
-    <button class="help-btn" id="helpBtn" type="button">？ 使い方</button>
+    <div class="brand">🌶️ 棋士との遭遇 <small>Chili²商会 ・ かんたん攻略サポート</small></div>
+    <button class="help-btn" id="helpBtn" type="button">📖 ガイド</button>
   </div>
 </header>
 <main class="container">
@@ -123,29 +214,29 @@
 
   <div class="workspace">
     <section class="panel controls" aria-label="駒と操作">
-      <h2 class="panel-title">操作パネル <span class="phase" id="phaseTag">① 敵を配置・編集</span></h2>
+      <h2 class="panel-title"><span>🌶️ 駒の配置</span> <span class="phase" id="phaseTag">① 敵を配置・編集</span></h2>
       <div id="status" class="status" role="status" aria-live="polite">まずは敵の駒を選び、盤面に置いてください。</div>
       <p class="hint" id="trayHint">配置する敵の駒をタップして選んでください</p>
       <div class="tray" id="tray" role="group" aria-label="敵の駒を選ぶ"></div>
       <div class="actions">
         <button type="button" class="primary" id="confirmBtn">盤面を確定する →</button>
-        <button type="button" class="secondary" id="resetBtn">初期化</button>
+        <div class="utility-actions">
+          <button type="button" class="secondary" id="resetBtn">↺ 初期化</button>
+          <button type="button" class="secondary delete-selected" id="deleteSelected" disabled>🗑 駒を削除</button>
+        </div>
       </div>
-      <button type="button" class="secondary delete-selected" id="deleteSelected" hidden>選択した敵の駒を削除</button>
-      <div class="control-separator" id="controlSeparator"></div>
-      <div class="meta" id="captureMeta"><span>倒した敵の数</span><strong id="captureCount">0</strong></div>
-      <div class="skill" id="skillBadge">👑 将軍を倒すと、次の1手に特別な能力が付きます。</div>
-      <p class="tiny-help" id="extraHelp">敵は自動で動きません。自分の駒を動かした後、実際のゲームに合わせて敵の駒を移動・追加してください。</p>
     </section>
 
     <section class="panel board-panel" aria-label="8列9行の盤面">
-      <div class="board-top"><strong>盤面（8 × 9）</strong><small>青い「車」が自分の駒です</small></div>
+      <div class="board-top"><strong>♟️ 盤面（8 × 9）</strong><span class="capture-pill">倒した敵 <strong id="captureCount">0</strong></span></div>
       <div class="legend" aria-label="色の意味">
         <span><i class="dot blue" aria-hidden="true"></i>青：安全・移動できる</span>
         <span><i class="dot red" aria-hidden="true"></i>赤：危険・移動できない</span>
       </div>
       <div class="board-frame"><div class="board" id="board" role="group" aria-label="駒の配置と移動を行う盤面"></div></div>
       <p class="board-note" id="boardNote">最初は青い「車」だけ。ゲーム画面を見ながら敵の位置を再現します。</p>
+      <div class="skill" id="skillBadge">👑 将軍を倒すと、次の1手に特別な能力が付きます。</div>
+      <p class="tiny-help" id="extraHelp">敵は自動で動きません。自分の駒を動かした後、実際のゲームに合わせて敵の駒を移動・追加してください。</p>
     </section>
   </div>
 </main>
@@ -158,6 +249,7 @@
   const TUTORIAL_KEY='chili-chess-guide-seen-v1';
   const $=id=>document.getElementById(id);
   const boardEl=$('board'),trayEl=$('tray'),statusEl=$('status');
+  const spotMap=new Map(),chipMap=new Map();
   const tutorialEl=$('tutorial'),confirmBtn=$('confirmBtn');
 
   const initialState=()=>({
@@ -373,26 +465,45 @@
     }
   }
 
-  function renderTray(){
-    trayEl.replaceChildren();
-    const exp=guideExpected();
+  // 最初に一度だけ操作ボタンを作る。操作のたびにDOMを作り直さないので
+  // スマホのフォーカス・スクロール位置が跳ねにくい。
+  function ensureTray(){
+    if(chipMap.size)return;
     for(const type of TYPES){
       const btn=document.createElement('button');
-      btn.type='button';btn.className='chip';btn.setAttribute('aria-pressed',String(game.selectedType===type));
-      const allowed=!guide.active||(exp?.mode==='place'&&exp.type===type);
-      btn.disabled=game.phase!=='edit'||!allowed;
-      if(guide.active&&exp?.mode==='place'&&exp.type===type)btn.classList.add('guide-focus');
+      btn.type='button';btn.className='chip';
       const symbol=document.createElement('span');symbol.className='symbol';symbol.textContent=SYMBOL[type];
       const name=document.createElement('span');name.textContent=type;
-      btn.append(symbol,name);btn.addEventListener('click',()=>onChip(type));trayEl.appendChild(btn);
+      btn.append(symbol,name);
+      btn.addEventListener('click',()=>onChip(type));
+      trayEl.appendChild(btn);chipMap.set(type,btn);
+    }
+  }
+  function renderTray(){
+    ensureTray();
+    const exp=guideExpected();
+    for(const [type,btn] of chipMap){
+      btn.setAttribute('aria-pressed',String(game.selectedType===type));
+      const allowed=!guide.active||(exp?.mode==='place'&&exp.type===type);
+      btn.disabled=game.phase!=='edit'||!allowed;
+      btn.classList.toggle('guide-focus',!!(guide.active&&exp?.mode==='place'&&exp.type===type));
+    }
+  }
+  function ensureBoard(){
+    if(spotMap.size)return;
+    for(let y=0;y<NY;y++)for(let x=0;x<NX;x++){
+      const spot=document.createElement('button');
+      spot.type='button';spot.className='spot';spot.dataset.xy=xy(x,y);
+      spot.addEventListener('click',()=>onSpot(x,y));
+      boardEl.appendChild(spot);spotMap.set(xy(x,y),spot);
     }
   }
   function renderBoard(){
+    ensureBoard();
     const opts=moveOptions(),exp=guideExpected();
-    boardEl.replaceChildren();
     for(let y=0;y<NY;y++)for(let x=0;x<NX;x++){
-      const spot=document.createElement('button');spot.type='button';spot.className='spot';
-      spot.dataset.xy=xy(x,y);
+      const spot=spotMap.get(xy(x,y));
+      spot.className='spot';
       if(!y)spot.classList.add('first-row');if(y===NY-1)spot.classList.add('last-row');
       if(!x)spot.classList.add('first-col');if(x===NX-1)spot.classList.add('last-col');
       const piece=at(x,y),option=opts.get(xy(x,y));
@@ -403,11 +514,12 @@
         (exp.mode==='relocate'&&(game.movingEnemy===null?(x===exp.sourceX&&y===exp.sourceY):(x===exp.x&&y===exp.y)))
       );
       if(target)spot.classList.add('guide-target');
+      const children=[];
       if(option||target){
         const marker=document.createElement('span');marker.className='spot-marker';
         if(target&&!option)spot.classList.add('ghost');
         if(!piece)marker.textContent=option?(option.safe?'•':'×'):(target?'＋':'');
-        spot.appendChild(marker);
+        children.push(marker);
       }
       if(piece){
         const chip=document.createElement('span');chip.className='piece '+(piece.side==='self'?'self':'enemy');
@@ -415,11 +527,11 @@
         if(game.sweep&&piece.side==='self')chip.classList.add('glow');
         const emoji=document.createElement('span');emoji.className='emoji';emoji.textContent=SYMBOL[piece.type];
         const label=document.createElement('span');label.textContent=piece.type;
-        chip.append(emoji,label);spot.appendChild(chip);
+        chip.append(emoji,label);children.push(chip);
       }
+      spot.replaceChildren(...children);
       const route=option?(option.safe?'、移動可能':'、危険・移動不可'):'';
       spot.setAttribute('aria-label',`左から${x+1}列目、上から${y+1}行目${piece?'、'+(piece.side==='self'?'自分':'敵')+'の'+piece.type:''}${route}${target?'、ガイドの指定位置':''}`);
-      spot.addEventListener('click',()=>onSpot(x,y));boardEl.appendChild(spot);
     }
   }
   function renderStatus(){statusEl.textContent=statusText;statusEl.className='status'+(statusTone?' '+statusTone:'')}
@@ -441,17 +553,16 @@
   function render(){
     renderGuide();renderStatus();renderTray();renderBoard();
     $('phaseTag').textContent=game.phase==='edit'?'① 敵を配置・編集':'② 自分の駒を移動';
-    $('trayHint').textContent='置く駒を選ぶ／盤上の敵をタップして移動';
-    $('trayHint').hidden=game.phase==='play';
-    trayEl.hidden=game.phase==='play';
-    confirmBtn.hidden=game.phase==='play';
-    confirmBtn.disabled=guide.active&&![2,6].includes(guide.step);
+    $('trayHint').textContent=game.phase==='edit'
+      ?'追加：一覧の駒 → 空きマス ／ 移動：盤上の敵 → 空きマス'
+      :'青いマスをタップして移動！';
+    // ボタンや駒トレイを非表示にすると盤面が上下するため、高さを維持する。
+    confirmBtn.textContent=game.phase==='play'?'🔵 青いマスへ移動':'盤面を確定する →';
+    confirmBtn.disabled=game.phase==='play'||(guide.active&&![2,6].includes(guide.step));
     confirmBtn.classList.toggle('guide-focus',guide.active&&[2,6].includes(guide.step));
     $('resetBtn').disabled=guide.active;
-    $('deleteSelected').hidden=guide.active||game.phase!=='edit'||game.movingEnemy===null;
+    $('deleteSelected').disabled=guide.active||game.phase!=='edit'||game.movingEnemy===null;
     $('captureCount').textContent=String(game.captured);
-    $('controlSeparator').hidden=guide.active;
-    $('captureMeta').hidden=guide.active;
     $('extraHelp').hidden=guide.active;
     const skill=$('skillBadge');skill.hidden=guide.active&&guide.step<8;skill.classList.toggle('active',game.sweep);
     skill.textContent=game.sweep?'✨ 将軍の能力が発動待ち！ 次の1手は駒を飛び越え、進路上の敵をまとめて捕獲できます。':'👑 将軍を倒すと、次の1手に特別な能力が付きます。';

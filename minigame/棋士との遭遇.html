@@ -170,6 +170,15 @@
   .board-note{color:#9b7880;margin:9px 0 0}
   .skill{background:#fff9ef;color:#845d47;border:1px solid #f4dfc2;border-radius:13px;margin-top:13px}
   .skill.active{background:#fff2cb;border-color:#f2cd6b;color:#85540c}
+  .item-button{width:100%;margin-top:10px;min-height:47px;display:flex;align-items:center;
+    justify-content:center;gap:7px;border:2px solid #d9c9f8;border-radius:13px;
+    color:#7851ac;background:#f8f3ff;font-size:13px;font-weight:800}
+  .item-button[aria-pressed="true"]{background:#6f47a7;border-color:#6f47a7;color:#fff;
+    box-shadow:0 3px 0 #4d307d}
+  .item-button:disabled{opacity:.5}
+  .item-description{font-size:12px;line-height:1.6;color:#856e91;margin:7px 2px 0}
+  .dot.item{background:#885dc0}
+  .spot.jump .spot-marker{box-shadow:inset 0 0 0 2px #9a6ed1,0 0 0 1px #9a6ed1}
   .tiny-help{color:#947880;margin:10px 1px 0}
   @media(max-width:769px){
     .container{max-width:540px;padding-left:11px;padding-right:11px}
@@ -235,7 +244,9 @@
       </div>
       <div class="board-frame"><div class="board" id="board" role="group" aria-label="駒の配置と移動を行う盤面"></div></div>
       <p class="board-note" id="boardNote">最初は青い「車」だけ。ゲーム画面を見ながら敵の位置を再現します。</p>
-      <div class="skill" id="skillBadge">👑 将軍を倒すと、次の1手に特別な能力が付きます。</div>
+      <div class="skill" id="skillBadge">👑 将軍を倒すと、次の移動後に着地点から十字の炎が走ります。</div>
+      <button type="button" id="itemBtn" class="item-button" aria-pressed="false">🎫 道具：障害物を飛び越える（OFF）</button>
+      <p class="item-description" id="itemDescription">課金アイテムを持っている場合だけONにしてください。次の移動で敵を最大3体まで飛び越えられます。飛び越えた敵は倒しません。</p>
       <p class="tiny-help" id="extraHelp">敵は自動で動きません。自分の駒を動かした後、実際のゲームに合わせて敵の駒を移動・追加してください。</p>
     </section>
   </div>
@@ -246,7 +257,7 @@
   const NX=8, NY=9;
   const TYPES=['卒','士','象','砲','馬','車','将'];
   const SYMBOL={ '卒':'🪖','士':'🧠','象':'🐘','砲':'💣','馬':'🐎','車':'🛺','将':'👑' };
-  const TUTORIAL_KEY='chili-chess-guide-seen-v1';
+  const TUTORIAL_KEY='chili-chess-guide-seen-v2';
   const $=id=>document.getElementById(id);
   const boardEl=$('board'),trayEl=$('tray'),statusEl=$('status');
   const spotMap=new Map(),chipMap=new Map();
@@ -255,7 +266,7 @@
   const initialState=()=>({
     pieces:[{id:1,type:'車',side:'self',x:3,y:5}],
     nextId:2,phase:'edit',selectedType:null,movingEnemy:null,
-    captured:0,sweep:false
+    captured:0,flameReady:false,itemArmed:false
   });
   let game=initialState();
   let guide={active:!wasGuideSeen(),step:0};
@@ -269,8 +280,10 @@
     {title:'⑤ 相手の手を盤面に反映',body:'自分が1手動かしたら、実際のゲームで相手が動かした駒を、この盤面でも動かします。敵を新しく追加することもできます。',action:'盤上の「馬」をタップし、続けて黄色い丸をタップして移動させてください。'},
     {title:'⑥ 敵の「将」を追加',body:'実際のゲームに新しい敵が現れたら、駒一覧から追加します。今回は特別な能力を持つ「将」を置きます。',action:'「👑 将」を選び、黄色い丸に置いてください。'},
     {title:'⑦ もう一度、盤面を確定',body:'敵の変更を反映できたら、次の自分の移動先を調べます。',action:'「盤面を確定する」を押してください。'},
-    {title:'⑧ 将軍を倒して能力を獲得',body:'将軍を捕獲すると特別な能力が手に入ります。このツールでは次の1手で障害物を無視し、進む方向の敵をまとめて捕獲できます。',action:'青枠の「将」をタップして捕獲してください。'},
-    {title:'ガイド完了！',body:'将軍の能力が有効になりました。ガイドを終えると、盤面と捕獲数を最初の状態に戻します。あとは自由に敵を配置して攻略に使えます。',action:'「ガイドを終えて、自由に使う」を押してください。'}
+    {title:'⑧ 将軍を倒して炎を獲得',body:'将軍を倒すと、次の自分の移動が終わった場所から縦横に炎が走り、その列と行にいる敵全員を倒します。炎は移動経路を飛び越える能力ではありません。',action:'青枠の「将」をタップして捕獲してください。'},
+    {title:'⑨ 次の移動の準備',body:'今回は将軍の炎を実際に試します。残った馬は離れていますが、炎なら十字方向に届きます。',action:'「盤面を確定する」を押してください。'},
+    {title:'⑩ 移動後に十字の炎が発動',body:'着地点から上下左右に炎が伸びます。進路上に障害物があっても炎は縦横の敵をまとめて倒します。なお、道具ボタンは別機能で、次の移動で最大3体を飛び越えたいときだけONにします。',action:'右側の青い丸（左から7列目・上から1行目）へ進んで、馬を炎で倒してください。'},
+    {title:'ガイド完了！',body:'将軍の炎と課金アイテムは別々の能力です。ガイドを終えると盤面と捕獲数を初期化します。アイテムは持っているときだけボタンでONにしてください。',action:'「ガイドを終えて、自由に使う」を押してください。'}
   ];
 
   function wasGuideSeen(){try{return localStorage.getItem(TUTORIAL_KEY)==='1'}catch{return false}}
@@ -328,48 +341,68 @@
   }
   function threatened(x,y,pieces){return pieces.filter(p=>p.side==='enemy').some(p=>attacks(p,x,y,pieces))}
 
+  // 将軍の炎：着地点から上下左右の列・行にいる敵を、間の駒に関係なく倒す。
+  // 炎は「車が移動可能な範囲」を広げる効果ではない。
+  function flameVictims(x,y,pieces){
+    return pieces.filter(p=>p.side==='enemy'&&(p.x===x||p.y===y)).map(p=>p.id);
+  }
+
+  // 道具OFF: 車は最初の敵までしか進めない。
+  // 道具ON: 最大3体を飛び越え、さらに先のマス（敵なら捕獲）を選べる。
+  // 飛び越えた敵は生存する。炎があれば移動完了後に十字で倒す。
   function moveOptions(){
     const options=new Map(),self=rook();
     if(!self||game.phase!=='play')return options;
     for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
       let x=self.x+dx,y=self.y+dy;
-      let crossed=[];
+      let passed=0;
       while(inBounds(x,y)){
         const victim=at(x,y);
-        if(victim&&victim.side==='enemy')crossed.push(victim.id);
-        // 将軍の能力中は進む経路の敵をまとめて捕獲できる。
-        const kills=game.sweep?[...crossed]:victim?[victim.id]:[];
-        const newPieces=game.pieces.filter(p=>!kills.includes(p.id)).map(p=>p.id===self.id?{...p,x,y}:p);
+        // 通過した相手は倒さない。着地点にいる相手だけ通常捕獲する。
+        const killIds=new Set(victim&&victim.side==='enemy'?[victim.id]:[]);
+        if(game.flameReady){
+          for(const id of flameVictims(x,y,game.pieces))killIds.add(id);
+        }
+        const newPieces=game.pieces.filter(p=>!killIds.has(p.id)).map(p=>p.id===self.id?{...p,x,y}:p);
         const dangerous=threatened(x,y,newPieces);
-        options.set(xy(x,y),{x,y,safe:!dangerous,kills});
-        if(victim&&!game.sweep)break;
+        options.set(xy(x,y),{x,y,safe:!dangerous,kills:[...killIds],jumpCount:passed});
+        if(victim){
+          if(!game.itemArmed||passed>=3)break;
+          passed++;
+        }
         x+=dx;y+=dy;
       }
     }
     return options;
   }
+
   function doMove(x,y){
     if(game.phase!=='play')return false;
     const option=moveOptions().get(xy(x,y));
     if(!option){say('そのマスには移動できません。青い丸か青枠の敵を選んでください。','warn');return false}
     if(!option.safe){say('赤いマスは敵の攻撃範囲です。安全な青いマスを選んでください。','warn');return false}
+    const self=rook();
+    const target=at(x,y);
+    const directCapture=target?.side==='enemy' ? target : null;
+    const firing=game.flameReady;
+    const spentItem=game.itemArmed;
     const removed=game.pieces.filter(p=>option.kills.includes(p.id));
     const gotGeneral=removed.some(p=>p.type==='将');
-    const usedSweep=game.sweep;
+    const flameCount=firing?removed.length-(directCapture&&removed.includes(directCapture)?1:0):0;
     game.pieces=game.pieces.filter(p=>!option.kills.includes(p.id));
-    const self=rook();self.x=x;self.y=y;
+    self.x=x;self.y=y;
     game.captured+=removed.length;
-    game.sweep=gotGeneral; // 能力を使用した手に新しく将を取った場合は再獲得
+    game.flameReady=gotGeneral; // 炎で別の将を倒した場合も、次の移動に再付与する
+    game.itemArmed=false; // アイテムONは今回の自分の1移動にだけ適用
     game.phase='edit';game.selectedType=null;game.movingEnemy=null;
-    if(gotGeneral){
-      say('👑 将軍を捕獲！ 次の1手は障害物を無視し、進む方向の敵をまとめて倒せます。','success');
-    }else if(removed.length){
-      say(`${removed.length}体捕獲しました！ 相手が動かした駒を移動・追加して、再度盤面を確定してください。`,'success');
-    }else if(usedSweep){
-      say('特別な能力を使いました。相手の駒を更新して次の手を確認してください。','success');
-    }else{
-      say('自分の「車」を移動しました。続いて相手の駒を移動・追加してください。','success');
-    }
+    const notices=[];
+    if(firing)notices.push(`🔥 着地点から十字の炎が発動！ 炎で${flameCount}体を撃破しました。`);
+    if(directCapture)notices.push(`「${directCapture.type}」を捕獲！`);
+    if(gotGeneral)notices.push('👑 将軍を撃破！ 次の移動後にも十字の炎が発動します。');
+    if(spentItem)notices.push(`🎫 道具を使用（${option.jumpCount}体飛び越え）。次の移動ではOFFに戻ります。`);
+    if(!notices.length)notices.push('自分の「車」を移動しました。');
+    notices.push('続いて相手の駒を移動・追加し、盤面を確定してください。');
+    say(notices.join(' '),'success');
     return true;
   }
 
@@ -382,6 +415,7 @@
       case 4:return {x:6,y:4,sourceX:5,sourceY:4,mode:'relocate'};
       case 5:return {type:'将',x:3,y:0,mode:'place'};
       case 7:return {x:3,y:0,mode:'capture'};
+      case 9:return {x:6,y:0,mode:'fire'};
       default:return null;
     }
   }
@@ -420,9 +454,9 @@
         }else{say('黄色い点線の丸に置いてください。','warn');renderStatus()}
         return;
       }
-      if(exp.mode==='capture'){
+      if(exp.mode==='capture'||exp.mode==='fire'){
         if(x===exp.x&&y===exp.y&&doMove(x,y))advanceGuide();
-        else{say('青く囲まれたガイド指定の駒をタップしてみましょう。','warn');renderStatus()}
+        else{say(exp.mode==='fire'?'ガイドの青い移動先に進んで、十字の炎を発動してください。':'青く囲まれたガイド指定の駒をタップしてみましょう。','warn');renderStatus()}
         return;
       }
       if(exp.mode==='relocate'){
@@ -507,10 +541,10 @@
       if(!y)spot.classList.add('first-row');if(y===NY-1)spot.classList.add('last-row');
       if(!x)spot.classList.add('first-col');if(x===NX-1)spot.classList.add('last-col');
       const piece=at(x,y),option=opts.get(xy(x,y));
-      if(option)spot.classList.add(option.safe?'safe':'danger');
+      if(option){spot.classList.add(option.safe?'safe':'danger');if(option.jumpCount)spot.classList.add('jump');}
       const target=guide.active&&exp&&(
         (exp.mode==='place'&&exp.x===x&&exp.y===y)||
-        (exp.mode==='capture'&&exp.x===x&&exp.y===y)||
+        ((exp.mode==='capture'||exp.mode==='fire')&&exp.x===x&&exp.y===y)||
         (exp.mode==='relocate'&&(game.movingEnemy===null?(x===exp.sourceX&&y===exp.sourceY):(x===exp.x&&y===exp.y)))
       );
       if(target)spot.classList.add('guide-target');
@@ -518,19 +552,19 @@
       if(option||target){
         const marker=document.createElement('span');marker.className='spot-marker';
         if(target&&!option)spot.classList.add('ghost');
-        if(!piece)marker.textContent=option?(option.safe?'•':'×'):(target?'＋':'');
+        if(!piece)marker.textContent=option?(option.safe?(option.jumpCount?'↷':'•'):'×'):(target?'＋':'');
         children.push(marker);
       }
       if(piece){
         const chip=document.createElement('span');chip.className='piece '+(piece.side==='self'?'self':'enemy');
         if(game.movingEnemy===piece.id)chip.classList.add('selected');
-        if(game.sweep&&piece.side==='self')chip.classList.add('glow');
+        if(game.flameReady&&piece.side==='self')chip.classList.add('glow');
         const emoji=document.createElement('span');emoji.className='emoji';emoji.textContent=SYMBOL[piece.type];
         const label=document.createElement('span');label.textContent=piece.type;
         chip.append(emoji,label);children.push(chip);
       }
       spot.replaceChildren(...children);
-      const route=option?(option.safe?'、移動可能':'、危険・移動不可'):'';
+      const route=option?(option.safe?'、移動可能':'、危険・移動不可')+(option.jumpCount?`、道具で${option.jumpCount}体飛び越え`:''):'';
       spot.setAttribute('aria-label',`左から${x+1}列目、上から${y+1}行目${piece?'、'+(piece.side==='self'?'自分':'敵')+'の'+piece.type:''}${route}${target?'、ガイドの指定位置':''}`);
     }
   }
@@ -558,18 +592,21 @@
       :'青いマスをタップして移動！';
     // ボタンや駒トレイを非表示にすると盤面が上下するため、高さを維持する。
     confirmBtn.textContent=game.phase==='play'?'🔵 青いマスへ移動':'盤面を確定する →';
-    confirmBtn.disabled=game.phase==='play'||(guide.active&&![2,6].includes(guide.step));
-    confirmBtn.classList.toggle('guide-focus',guide.active&&[2,6].includes(guide.step));
+    confirmBtn.disabled=game.phase==='play'||(guide.active&&![2,6,8].includes(guide.step));
+    confirmBtn.classList.toggle('guide-focus',guide.active&&[2,6,8].includes(guide.step));
     $('resetBtn').disabled=guide.active;
     $('deleteSelected').disabled=guide.active||game.phase!=='edit'||game.movingEnemy===null;
     $('captureCount').textContent=String(game.captured);
     $('extraHelp').hidden=guide.active;
-    const skill=$('skillBadge');skill.hidden=guide.active&&guide.step<8;skill.classList.toggle('active',game.sweep);
-    skill.textContent=game.sweep?'✨ 将軍の能力が発動待ち！ 次の1手は駒を飛び越え、進路上の敵をまとめて捕獲できます。':'👑 将軍を倒すと、次の1手に特別な能力が付きます。';
-    $('boardNote').textContent=game.phase==='edit'?'駒を選んで交点へ配置。敵をタップすると位置を変更できます。':game.sweep?'特別な能力が有効です。青いマスを選んで移動してください。':'青い丸＝移動可／青枠の敵＝捕獲可／赤い丸＝危険';
+    const skill=$('skillBadge');skill.hidden=false;skill.classList.toggle('active',game.flameReady);
+    skill.textContent=game.flameReady?'🔥 将軍の炎が待機中！ 次の移動完了後、着地点から縦横すべての敵を撃破します。移動途中の敵は飛び越えられません。':'👑 将軍を倒すと、次の移動後に着地点から十字の炎が走り、縦横の敵を全員撃破します。';
+    const itemBtn=$('itemBtn');itemBtn.disabled=guide.active;itemBtn.setAttribute('aria-pressed',String(game.itemArmed));
+    itemBtn.textContent=game.itemArmed?'🎫 障害物飛び越え：ON（タップで解除）':'🎫 道具：障害物を飛び越える（OFF）';
+    $('itemDescription').textContent=game.itemArmed?'次の移動だけ敵を最大3体飛び越えられます。飛び越えた敵は残ります。':'課金アイテムを持っている場合だけONにしてください。次の移動で敵を最大3体まで飛び越えられます。飛び越えた敵は倒しません。';
+    $('boardNote').textContent=game.phase==='edit'?'駒を選んで交点へ配置。敵をタップすると位置を変更できます。':game.flameReady?'🔥 次の移動が終わったマスから十字の炎！ 青いマスを選んでください。':game.itemArmed?'青い丸＝移動可 ／ ↷＝アイテムで飛び越える移動':'青い丸＝移動可／青枠の敵＝捕獲可／赤い丸＝危険';
   }
   confirmBtn.addEventListener('click',()=>{
-    if(guide.active&&![2,6].includes(guide.step))return;
+    if(guide.active&&![2,6,8].includes(guide.step))return;
     confirmBoard();if(guide.active)advanceGuide();else render();
   });
   $('deleteSelected').addEventListener('click',()=>{
@@ -579,16 +616,22 @@
   });
   $('resetBtn').addEventListener('click',()=>{
     if(guide.active)return;
-    if(game.pieces.length>1||game.captured||game.phase==='play'||game.sweep){
+    if(game.pieces.length>1||game.captured||game.phase==='play'||game.flameReady||game.itemArmed){
       if(!window.confirm('すべての駒の配置と捕獲数を初期状態に戻しますか？'))return;
     }
     game=initialState();say('初期状態に戻しました。敵の駒を配置してください。');render();
+  });
+  $('itemBtn').addEventListener('click',()=>{
+    if(guide.active)return;
+    game.itemArmed=!game.itemArmed;
+    say(game.itemArmed?'🎫 道具をONにしました。次の移動では最大3体を飛び越えられます。':'🎫 道具をOFFにしました。','success');
+    render();
   });
   $('skipGuide').addEventListener('click',finishGuide);
   $('finishGuide').addEventListener('click',finishGuide);
   $('helpBtn').addEventListener('click',()=>{
     if(guide.active){tutorialEl.scrollIntoView({behavior:'smooth',block:'start'});return}
-    if(game.pieces.length>1||game.phase==='play'||game.captured||game.sweep){
+    if(game.pieces.length>1||game.phase==='play'||game.captured||game.flameReady||game.itemArmed){
       if(!window.confirm('ガイドを開始すると現在の盤面は初期化されます。開始しますか？'))return;
     }
     startGuide();

@@ -1,209 +1,353 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ゲームイベント管理ポータル</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chili²商会 | コンテンツ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: #f5f6fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* ヘッダー */
+    .top-bar {
+      background: linear-gradient(135deg, #d62828, #a4161a);
+      color: white;
+      text-align: center;
+      padding: 22px 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .sub-title {
+      font-size: 13px;
+      margin-top: 4px;
+      opacity: 0.85;
+    }
+
+    /* メイン */
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    .section {
+      margin-bottom: 38px;
+    }
+
+    .section-title {
+      font-size: 21px;
+      font-weight: bold;
+      margin: 0 0 18px;
+      padding-left: 12px;
+      border-left: 5px solid #e63946;
+    }
+
+    /* 共通カード */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.09);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 9px 22px rgba(0,0,0,0.16);
+    }
+
+    .card:focus-visible {
+      outline: 3px solid #e63946;
+      outline-offset: 4px;
+    }
+
+    /* 服装報酬 */
+    .reward-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      min-height: 135px;
+      background: linear-gradient(120deg, #fff0e4, #fffaf6);
+      border: 1px solid #f5d9c3;
+      padding: 25px 30px;
+    }
+
+    .reward-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .reward-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 75px;
+      height: 75px;
+      border-radius: 18px;
+      background: white;
+      font-size: 39px;
+      flex-shrink: 0;
+    }
+
+    .reward-name {
+      font-size: 23px;
+      font-weight: bold;
+      color: #8e2929;
+    }
+
+    .reward-description {
+      font-size: 14px;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .reward-arrow {
+      font-size: 26px;
+      color: #b93838;
+    }
+
+    /* ミニゲーム */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background-color: #353745;
+    }
+
+    .game-image {
+      height: 185px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: transform 0.3s;
+    }
+
+    .game-card:hover .game-image {
+      transform: scale(1.04);
+    }
+
+    .game-info {
+      position: relative;
+      background: white;
+      text-align: center;
+      padding: 17px 10px;
+    }
+
+    .game-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .game-hint {
+      font-size: 12px;
+      color: #999;
+      margin-top: 3px;
+    }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      padding: 10px 0 25px;
+    }
+
+    /* スマホ */
+    @media (max-width: 650px) {
+      .top-bar {
+        padding: 18px 12px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      .container {
+        padding: 24px 15px 35px;
+      }
+
+      .section-title {
+        font-size: 19px;
+      }
+
+      .reward-card {
+        padding: 20px;
+        min-height: 110px;
+      }
+
+      .reward-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 31px;
+      }
+
+      .reward-left {
+        gap: 13px;
+      }
+
+      .reward-name {
+        font-size: 19px;
+      }
+
+      .reward-description {
+        font-size: 12px;
+      }
+
+      .game-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+      }
+
+      .game-image {
+        height: 190px;
+      }
+
+      .game-info {
+        padding: 13px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .game-image {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- ヘッダー -->
   <header class="top-bar">
     <div class="logo">🌶️ Chili²商会</div>
+    <div class="sub-title">ゲームコンテンツポータル</div>
   </header>
 
-  <main class="main-content">
-      <!-- ▼ ホーム画面 ▼ -->
-          <div id="view-home" class="view-section active">
-            <h3 class="section-title">ホーム</h3>
+  <main class="container">
 
-            <!-- クイックメニュー（3列グリッド） -->
-            <div class="home-section">
-              <div class="home-section-title">クイックアクセス</div>
-              <div class="btn-grid-3">
-                <a href="https://shonin-chilichili.github.io/hukusou/" class="action-btn" rel="noopener noreferrer">
-                  <span class="action-btn-icon">👕</span>
-                  <span class="action-btn-label">服装報酬</span>
-                </a>
-                <a href="item-price.html" class="action-btn" rel="noopener noreferrer">
-                  <span class="action-btn-icon">💰</span>
-                  <span class="action-btn-label">各イベント課金詳細</span>
-                </a>
-                <button class="action-btn">
-                  <span class="action-btn-icon">📅</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">📊</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">❓</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">🌶️</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-              </div>
+    <!-- 服装報酬 -->
+    <section class="section">
+      <h2 class="section-title">服装報酬</h2>
+
+      <a
+        href="https://shonin-chilichili.github.io/hukusou/"
+        class="card reward-card"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="reward-left">
+          <div class="reward-icon">👕</div>
+
+          <div>
+            <div class="reward-name">服装報酬</div>
+            <div class="reward-description">
+              服装の報酬情報はこちら
             </div>
-
-            <!-- コンテンツメニュー（2列グリッド） -->
-            <div class="home-section">
-              <div class="home-section-title">商会コンテンツ</div>
-              <div class="btn-grid-2">
-                <button class="action-btn">
-                  <span class="action-btn-icon">🚢</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">🏰</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">🐉</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">👑</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- サポート・コミュニティ（2列グリッド） -->
-            <div class="home-section">
-              <div class="home-section-title">外部サイト</div>
-              <div class="btn-grid-2">
-                <a href="https://auto-page.37games.com/dzg_0714/?cid=zfy&appLanguage=en-US" class="action-btn" target="_blank" rel="noopener noreferrer">
-                  <span class="action-btn-icon">📜</span>
-                  <span class="action-btn-label">課金報酬</span>
-                </a>
-                <a href="https://cdnorigin-gevents.37games.com/globalexchange/index.html?gameid=209" class="action-btn" target="_blank" rel="noopener noreferrer">
-                  <span class="action-btn-icon">🎁</span>
-                  <span class="action-btn-label">ギフトコード</span>
-                </a>
-                <button class="action-btn">
-                  <span class="action-btn-icon">🛡️</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-                <button class="action-btn">
-                  <span class="action-btn-icon">📞</span>
-                  <span class="action-btn-label">coming soon</span>
-                </button>
-              </div>
-            </div>
-
           </div>
-
-
-
-    <!-- ▼ イベント/イベント一覧画面 ▼ -->
-    <div id="view-event-detail" class="view-section active">
-      <h3 class="section-title">開催イベント一覧</h3>
-      <div id="event-list-container">
-        <!-- JSでイベントカードが自動挿入されます -->
-      </div>
-    </div>
-
-    <!-- ▼ イベント詳細画面 ▼ -->
-    <div id="view-event-detail" class="view-section">
-      <button id="back-to-events-btn" class="btn-secondary" style="margin-bottom: 15px;">← イベント一覧に戻る</button>
-      <h3 id="detail-event-title" class="section-title">イベント名</h3>
-      <div id="event-history-container">
-        <!-- JSで日付ごとの全員の戦績が自動挿入されます -->
-      </div>
-    </div>
-
-<!-- ▼ ミニゲーム画面 ▼ -->
-    <div id="view-minigame" class="view-section">
-      <h3 class="section-title">ミニゲーム</h3>
-      
-      <!-- カード全体をタップで移動可能なリンク構造 -->
-      <a href="minigame/牧場点呼.html" class="game-card" style="background-image: url('image/牧場点呼.png');" target="_blank" rel="noopener noreferrer">
-        <div class="game-card-content">
-          <span class="game-title">牧場点呼</span>
         </div>
+
+        <span class="reward-arrow">❯</span>
       </a>
-      <br>
-      <a href="minigame/棋士との遭遇.html" class="game-card" style="background-image: url('image/棋士との遭遇.png');" target="_blank" rel="noopener noreferrer">
-        <div class="game-card-content">
-          <span class="game-title">棋士との遭遇</span>
-        </div>
-      </a>
-      <br>
-      <a href="minigame/花札の恋.html" class="game-card" style="background-image: url('image/花札の恋.png');" target="_blank" rel="noopener noreferrer">
-        <div class="game-card-content">
-          <span class="game-title">花札の恋</span>
-        </div>
-      </a>
+    </section>
 
-    </div>
+    <!-- ミニゲーム -->
+    <section class="section">
+      <h2 class="section-title">🎮 ミニゲーム</h2>
 
-    <!-- ▼ マイページ画面 ▼ -->
-    <div id="view-profile" class="view-section">
-      <h3 class="section-title">マイページ</h3>
+      <div class="game-grid">
 
-      <!-- 未ログイン状態（ID入力フォーム） -->
-      <div id="login-form" class="card text-center">
-        <p>プレイヤーID（番号）を入力してください。</p>
-        <p class="hint">※テスト用ID: 1001 (田中), 1002 (佐藤)</p>
-        <input type="number" id="member-id-input" placeholder="例: 1001" inputmode="numeric">
-        <p id="login-error" class="error-msg hidden">該当するIDが見つかりません。</p>
-        <button id="login-btn" class="btn-primary" style="width: 100%;">戦績を見る</button>
+        <!-- 牧場点呼 -->
+        <a
+          href="minigame/牧場点呼.html"
+          class="card game-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div
+            class="game-image"
+            style="background-image: url('image/牧場点呼.png');"
+          ></div>
+
+          <div class="game-info">
+            <div class="game-title">🐄 牧場点呼</div>
+            <div class="game-hint">タップしてプレイ ❯</div>
+          </div>
+        </a>
+
+        <!-- 棋士との遭遇 -->
+        <a
+          href="minigame/棋士との遭遇.html"
+          class="card game-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div
+            class="game-image"
+            style="background-image: url('image/棋士との遭遇.png');"
+          ></div>
+
+          <div class="game-info">
+            <div class="game-title">♟️ 棋士との遭遇</div>
+            <div class="game-hint">タップしてプレイ ❯</div>
+          </div>
+        </a>
+
+        <!-- 花札の恋 -->
+        <a
+          href="minigame/花札の恋.html"
+          class="card game-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div
+            class="game-image"
+            style="background-image: url('image/花札の恋.png');"
+          ></div>
+
+          <div class="game-info">
+            <div class="game-title">🌸 花札の恋</div>
+            <div class="game-hint">タップしてプレイ ❯</div>
+          </div>
+        </a>
+
       </div>
-
-      <!-- ログイン成功後の表示エリア -->
-      <div id="user-dashboard" class="hidden">
-        <div class="user-header card">
-          <div class="user-icon">👤</div>
-          <h4 id="user-name">---</h4>
-          <p>ID: <span id="user-id-display">----</span></p>
-          <button id="logout-btn" class="btn-secondary btn-sm" style="margin-top: 10px;">ID変更</button>
-        </div>
-
-        <!-- 表示形式の切り替えタブ -->
-        <div class="display-toggle-tabs">
-          <button id="tab-timeline" class="toggle-tab active">日付順（時系列）</button>
-          <button id="tab-by-event" class="toggle-tab">イベント別</button>
-        </div>
-
-        <!-- 時系列表示 -->
-        <div id="personal-timeline-view">
-          <!-- JSで自動生成 -->
-        </div>
-
-        <!-- イベント別表示 -->
-        <div id="personal-by-event-view" class="hidden">
-          <!-- JSで自動生成 -->
-        </div>
-      </div>
-
-    </div>
+    </section>
 
   </main>
 
-  <!-- 下部固定ナビゲーション -->
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item" data-target="home">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-label">ホーム</span>
-    </a>
-    <a href="#" class="nav-item" data-target="minigame">
-      <span class="nav-icon">🎮</span>
-      <span class="nav-label">ミニゲーム</span>
-    </a>
-    <a href="#" class="nav-item active" data-target="event-detail">
-      <span class="nav-icon">🏆</span>
-      <span class="nav-label">イベント</span>
-    </a>
-    <a href="#" class="nav-item" data-target="profile">
-      <span class="nav-icon">👤</span>
-      <span class="nav-label">マイページ</span>
-    </a>
-  </nav>
+  <footer class="footer">
+    Chili²商会
+  </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>

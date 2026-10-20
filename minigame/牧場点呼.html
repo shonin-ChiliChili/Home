@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#cf3f4c">
+<title>牧場点呼 攻略アシスタント | 🌶️ Chili²商会</title>
+<style>
+:root{--red:#d13d4c;--red-dark:#923543;--rose:#fff0f0;--bg:#fff8f4;--ink:#47363b;--sub:#806c70;--line:#efd9d3;--board:#fff5e7;--green:#20845d;--shadow:0 5px 18px #79393c0d}
+*{box-sizing:border-box}html{min-height:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:disabled{opacity:.42;cursor:not-allowed}button:focus-visible,summary:focus-visible{outline:3px solid #ffbb45;outline-offset:2px}[hidden]{display:none!important}
+.page{max-width:1000px;margin:auto;padding:0 12px 35px}.header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(125deg,#fa7772,#ca334c);color:white;padding:12px 15px;border-radius:0 0 20px 20px;box-shadow:0 4px 14px #a83d5233}.brand{font-size:19px;font-weight:900}.brand small{display:block;font-size:10px;letter-spacing:.06em;font-weight:600;opacity:.92}.pill{font-size:11px;padding:7px 9px;border:1px solid #ffffff90;border-radius:30px;white-space:nowrap}.headrow{display:flex;align-items:center;gap:9px;margin:12px 2px 10px;flex-wrap:wrap}.headrow h1{font-size:21px;color:var(--red-dark);margin:0}.subhead{font-size:12px;color:var(--sub);margin:0 2px 11px;line-height:1.5}.workspace{display:grid;grid-template-columns:minmax(0,560px) minmax(300px,1fr);gap:15px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:12px;box-shadow:var(--shadow);min-width:0}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:9px}.panel-title h2{margin:0;color:var(--red-dark);font-size:16px}.turn{color:#bd4854;font-size:11px;font-weight:800;white-space:nowrap;background:#fff0ef;border-radius:50px;padding:6px 10px}.tiny{font-size:11px;color:var(--sub);line-height:1.5}.palette-wrap{position:relative}.palette{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;padding:2px 1px 7px;scrollbar-width:thin;scrollbar-color:#f0bbc0 transparent}.chip{flex:0 0 65px;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:#fffbf9;border:1.5px solid #efd9d3;border-radius:11px;color:var(--ink);padding:5px 1px;touch-action:manipulation}.chip strong{font-size:10px}.chip small{font-size:9px;color:var(--sub)}.chip .em{font-size:21px;line-height:1.15}.chip.active{background:#ffedf0;border:2px solid var(--red);color:var(--red-dark)}.controlrow{display:flex;gap:7px;margin:4px 0 8px;align-items:center}.mini-btn{border:1px solid #ecd4d2;background:#fff9f7;border-radius:10px;min-height:39px;padding:6px 8px;color:var(--red-dark);font-size:12px;font-weight:800;flex:1 1 0;white-space:nowrap}.mini-btn.danger{color:#bd3448}.boardholder{width:100%;max-width:440px;margin:auto}.colnums{display:grid;grid-template-columns:repeat(9,1fr);text-align:center;font-size:10px;font-weight:800;color:#b68f75;margin:0 0 3px}.board{position:relative;width:100%;aspect-ratio:9/11;overflow:hidden;background:var(--board);border:2px solid #eec4b9;border-radius:12px;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none}.grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(11,1fr)}.cell{border:0;border-right:1px solid #eedfcd;border-bottom:1px solid #eedfcd;background:transparent;padding:0;border-radius:0;min-width:0;min-height:0;touch-action:none}.cell:nth-child(9n){border-right:0}.cell:nth-child(n+91){border-bottom:0}.cell:nth-child(18n+1),.cell:nth-child(18n+3),.cell:nth-child(18n+5),.cell:nth-child(18n+7),.cell:nth-child(18n+9){background:#e9c19310}.animals,.marks{position:absolute;inset:0;pointer-events:none}.animal{position:absolute;display:flex;align-items:center;justify-content:center;gap:2px;padding:0 2px;border:1.5px solid #d6ad84;background:#fffef9;border-radius:9px;color:#6e4c40;box-shadow:0 2px 4px #754b3027;white-space:nowrap;overflow:hidden;font-size:12px;font-weight:900;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;z-index:2}.animal .em{font-size:clamp(14px,4.6vw,23px);line-height:1}.animal .name{font-size:clamp(8px,2.4vw,11px);letter-spacing:-.06em}.animal[data-type="unknown"]{background:#fff0d1;border:2px dashed #de9851}.animal[data-type="bull"]{background:#ffe0d7;border-color:#d88772}.animal.selected{border:3px solid #d43c50;box-shadow:0 0 0 2px #f5a9b3;z-index:4}.animal.best{border:3px solid var(--red);box-shadow:0 0 0 2px #f5abb4;z-index:3}.animal.dragging{z-index:10;filter:drop-shadow(0 4px 7px #a53a4d4f);opacity:.85;transition:none!important}.mark{position:absolute;border-radius:9px;border:3px dashed var(--green);background:#79dba246;color:#106b47;display:grid;place-items:center;font-weight:900;font-size:11px;z-index:5}.mark.invalid{border-color:#da5360;background:#ff80903d;color:#bb3448}.mark.guide{pointer-events:none}.marks .mark{pointer-events:none}.picker{position:absolute;z-index:30;display:flex;gap:6px;padding:7px;border-radius:12px;background:white;border:2px solid #dc9ca3;box-shadow:0 5px 22px #82464e44;transform:translate(-50%,0);max-width:95%;pointer-events:auto}.picker button{border:1px solid #ebbdc4;background:#fff2f2;color:var(--red-dark);border-radius:9px;min-width:67px;min-height:45px;font-size:12px;font-weight:900}.picker .pick-dismiss{min-width:28px;background:#fafafa;color:#756167}.board-message{margin:8px 0 2px;padding:7px 9px;border:1px solid #f4dfd6;border-radius:10px;background:#fffaf4;color:#895c56;font-size:11px;line-height:1.5;min-height:35px}.board-message strong{color:#be3d50}.quickbar{margin-top:11px;background:#fff7f1;border:1px solid #f3dad1;border-radius:13px;padding:10px}.mini-head{display:flex;justify-content:space-between;align-items:center;gap:7px}.mini-head strong{font-size:14px;color:var(--red-dark)}.bar-hint{color:var(--sub);font-size:10px}.bar{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px;margin:8px 0}.bar-cell{height:37px;min-width:0;background:#fff;border:1px dashed #e4baa7;border-radius:6px;font-size:10px;color:#ab8d81;font-weight:800;padding:0;touch-action:manipulation}.bar-cell.filled{background:#ffddab;border:1px solid #e5a05d;color:#9d621c}.bar-cell.start{box-shadow:inset 3px 0 0 #ca7938}.bar-cell .len{font-size:12px}.bar-tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.len-btn{padding:8px 0;min-height:38px;border:1px solid #efd6cf;border-radius:9px;background:#fff;color:#9d715f;font-size:11px;font-weight:900}.len-btn.active{border:2px solid var(--red);background:#fff0f1;color:#c2374b}.len-btn.clear{font-size:10px}.advice{margin-top:10px;background:linear-gradient(120deg,#fff1f0,#fffaf7);border:1px solid #f1cbcb;border-radius:12px;padding:10px;min-height:64px}.eyebrow{font-size:10px;font-weight:900;color:#a84757}.headline{font-size:17px;color:var(--red-dark);font-weight:900;line-height:1.4;margin:3px 0}.desc{font-size:11px;color:#805d60;line-height:1.5}.tagline{display:inline-block;margin-top:5px;background:#ffe5db;padding:4px 8px;border-radius:30px;font-size:10px;color:#946043;font-weight:850}.primary{background:linear-gradient(120deg,#ef606a,#c93652);color:#fff;border:0;border-radius:11px;min-height:46px;padding:10px 15px;font-size:14px;font-weight:900;box-shadow:0 4px 9px #bc39502f}.primary:disabled{box-shadow:none}.full{width:100%}.notice{background:#f4fbf5;border:1px solid #cbe8d4;color:#407354;padding:9px 10px;border-radius:10px;margin-top:9px;font-size:11px;line-height:1.6}.side-panel{display:flex;flex-direction:column;gap:12px}.side-panel .panel{padding:14px}.side-panel h3{font-size:15px;color:var(--red-dark);margin:0 0 8px}.side-panel p,.side-panel li{font-size:12px;color:var(--sub);line-height:1.7}.side-panel ol{padding-left:20px;margin:4px 0}.side-panel details{font-size:12px;color:var(--sub);line-height:1.65}.side-panel summary{color:#a84757;font-weight:850;cursor:pointer}.row-tools{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.row-tools button{flex:1}.footer{text-align:center;color:#bd9598;font-size:11px;margin:14px 0}.sr-only{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden}
+@media(max-width:800px){.workspace{grid-template-columns:minmax(0,1fr)}.side-panel{gap:9px}.side-panel .panel{padding:11px}.page{padding:0 10px 22px}.subhead{margin-bottom:8px}.headrow{margin:10px 2px 6px}.headrow h1{font-size:18px}.panel{padding:9px}.panel-title{margin-bottom:6px}.panel-title h2{font-size:14px}.boardholder{max-width:440px}.board-message{margin-top:6px}.quickbar{margin-top:8px}.chip{flex-basis:62px;min-height:54px}.controlrow{margin-top:2px}.advice{min-height:56px;margin-top:8px}.desc{line-height:1.4}}
+@media(max-width:380px){.page{padding:0 7px 20px}.header{padding:11px 10px}.brand{font-size:17px}.pill{font-size:10px}.chip{flex-basis:59px}.mini-btn{padding:6px 4px;font-size:11px}.animal .em{font-size:14px}.animal .name{font-size:8px}.bar-hint{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="header"><div class="brand">🌶️ Chili²商会 <small>ゲームイベント攻略ツール</small></div><span class="pill">🐾 牧場点呼</span></header>
+<div class="headrow"><h1>牧場点呼 攻略アシスタント</h1><span class="turn" id="turnBadge">1 / 300ターン</span></div>
+<p class="subhead">🐾 動物は横にスワイプして移動。支えがなくなると自動で下に落ちます。</p>
+<div class="workspace">
+ <section class="panel" aria-label="盤面と次の予告">
+  <div class="panel-title"><h2>🐤 今の盤面（9×11）</h2><span class="tiny">動物を選択 → 盤面をタップ</span></div>
+  <div class="palette-wrap"><div class="palette" id="palette" role="group" aria-label="配置する動物"></div></div>
+  <div class="controlrow">
+   <button class="mini-btn" id="undoBtn" type="button">↶ 戻す</button>
+   <button class="mini-btn" id="dropBtn" type="button">⬇ 重力整列</button>
+   <button class="mini-btn danger" id="deleteBtn" type="button">✕ 選択中を削除</button>
+  </div>
+  <div class="boardholder">
+   <div class="colnums" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+   <div id="board" class="board" aria-label="9列11行の牧場。動物を横方向にスワイプすると移動します">
+    <div id="boardCells" class="grid"></div><div id="animalsLayer" class="animals"></div><div id="overlayLayer" class="marks"></div><div id="quickPicker" class="picker" hidden></div>
+   </div>
+  </div>
+  <div class="board-message" id="boardStatus" aria-live="polite">🌱 動物を選んで盤面に置いてください。</div>
+  <div class="quickbar" id="previewPanel">
+   <div class="mini-head"><strong>🔮 次に出るバー</strong><span class="bar-hint" id="barStatus">横幅を選択 → 開始位置をタップ</span></div>
+   <div class="bar" id="previewBar" aria-label="次の出現バー 9列"></div>
+   <div class="bar-tools" id="barSizes" aria-label="次の動物の横幅"></div>
+  </div>
+  <div class="advice" id="result" aria-live="polite"><div class="desc">盤面と次のバーを入力するとおすすめの一手を表示します。</div></div>
+  <div style="margin-top:8px"><button class="primary full" id="applyBtn" type="button" disabled>この手で次のターンへ →</button></div>
+  <div class="notice" id="resolveNotice" hidden>❔ 新しい動物が現れました。盤面の「？」をタップすると、その場で種類を選べます。入力後、次のバーを登録してください。</div>
+ </section>
+ <aside class="side-panel">
+  <section class="panel">
+   <h3>🌶️ かんたんな使い方</h3>
+   <ol>
+    <li>動物を選び、盤面に置く（<strong>下の段から</strong>入れると楽です）。</li>
+    <li>配置済みの動物は<strong>横にスワイプ</strong>で動かせます。離すと自動で落下します。</li>
+    <li>次のバーをすぐ下で入力。赤い動物と緑の移動先が、おすすめの一手です。</li>
+    <li>実際のゲームで動かした後、<strong>「次のターンへ」</strong>。現れた「？」をタップして種類を選びます。</li>
+   </ol>
+   <p>※動物が動かない場合は、横に障害物があります。赤い駒はおすすめの移動元、緑枠は移動先です。</p>
+  </section>
+  <section class="panel">
+   <h3>🧰 その他の操作</h3>
+   <div class="row-tools"><button id="demoBtn" type="button" class="mini-btn">お試し盤面</button><button id="clearBtn" type="button" class="mini-btn danger">最初から</button></div>
+   <details style="margin-top:12px"><summary>計算のルールと注意点</summary>
+    <p>横長の動物は1つのかたまりとして落下し、横幅のどこかに支えがあると止まります。支えがなくなると、下の動物や底にぶつかるまで落下します。9マスが揃うと列を消去する近似計算です。</p>
+    <p>予告バーからは長さと位置だけを読み取り、登場後の種類は「？」から指定します。得点・特殊能力・野牛の詳細挙動・盤面が空になった際の2列補充などはまだ完全再現ではありません。実際のゲームと違う箇所は手動で修正してください。</p>
+   </details>
+  </section>
+ </aside>
+</div>
+<footer class="footer">🌶️ Chili²商会 · 牧場点呼攻略アシスタント（試作版）</footer>
+</div>
+<script>
+'use strict';
+const W=9,H=11,STORE='chili_makiba_advisor_v2',OLD_STORE='chili_makiba_advisor_v1';
+const ANIMALS={
+ chick:{name:'ひよこ',emoji:'🐤',len:1},fox:{name:'きつね',emoji:'🦊',len:1},
+ cat:{name:'ねこ',emoji:'🐱',len:2},snake:{name:'へび',emoji:'🐍',len:2},
+ weasel:{name:'いたち',emoji:'🦦',len:3},pig:{name:'ぶた',emoji:'🐷',len:3},
+ donkey:{name:'ろば',emoji:'🫏',len:4},bear:{name:'くま',emoji:'🐻‍❄️',len:4},
+ bull:{name:'野牛',emoji:'🦬',len:5},unknown:{name:'未確認',emoji:'❔',len:0}
+};
+const $=id=>document.getElementById(id);
+const fresh=()=>({pieces:[],preview:[],idSeq:1,turn:1,placeType:'chick',previewLen:2,selected:null,suggestion:null});
+let st=fresh(),history=[],recalcTimer=null,msg='',drag=null;
+function inGrid(x,y,len=1){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x+len<=W&&y<H;}
+function intersects(p,x,y){return p.y===y&&x>=p.x&&x<p.x+p.len;}
+function getAt(x,y,pieces,except=null){return pieces.find(p=>p.id!==except&&intersects(p,x,y));}
+function freeAt(pieces,x,y,len,except=null){if(!inGrid(x,y,len))return false;for(let i=x;i<x+len;i++)if(getAt(i,y,pieces,except))return false;return true;}
+function canSlide(p,pieces,to){if(!inGrid(to,p.y,p.len)||to===p.x)return false;const d=Math.sign(to-p.x);for(let x=p.x+d;d>0?x<=to:x>=to;x+=d)if(!freeAt(pieces,x,p.y,p.len,p.id))return false;return true;}
+function gravity(pieces){ // 横長の動物を分割せず、底・ほかの動物まで連続落下させる
+ for(let pass=0;pass<H+2;pass++){
+  let changed=false;
+  const ordered=[...pieces].sort((a,b)=>b.y-a.y||a.id-b.id);
+  for(const p of ordered){let ny=p.y;while(ny<H-1&&freeAt(pieces,p.x,ny+1,p.len,p.id))ny++;if(ny!==p.y){p.y=ny;changed=true;}}
+  if(!changed)break;
+ }
+ return pieces;
+}
+function clearRows(pieces){let rows=0,bullHits=0,chain=0;
+ for(let pass=0;pass<H+2;pass++){
+  let filled=[];for(let y=0;y<H;y++){let n=0;for(let x=0;x<W;x++)if(getAt(x,y,pieces))n++;if(n===W)filled.push(y);}
+  if(!filled.length)break;chain++;rows+=filled.length;const del=new Set();
+  for(const p of pieces){if(!filled.includes(p.y))continue;if(p.type==='bull'){bullHits++;if(p.len<=1)del.add(p.id);else{p.len--;if(p.head==='right')p.x++;}}else del.add(p.id);}
+  pieces=pieces.filter(p=>!del.has(p.id));gravity(pieces);
+ }
+ return {pieces,rows,bullHits,chain};
+}
+function clonePieces(pieces){return pieces.map(p=>({...p}));}
+function describe(p){const a=ANIMALS[p.type]||ANIMALS.unknown;return `${a.emoji} ${a.name}（${p.len}マス）`;}
+function status(t){msg=t;$('boardStatus').textContent=t;}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({...st,selected:null,suggestion:null}));}catch(e){}}
+function restore(){try{const raw=localStorage.getItem(STORE)||localStorage.getItem(OLD_STORE);if(!raw)return;const obj=JSON.parse(raw);if(!obj||!Array.isArray(obj.pieces)||!Array.isArray(obj.preview))return;
+  let clean=obj.pieces.filter(p=>p&&ANIMALS[p.type]&&Number.isInteger(p.x)&&Number.isInteger(p.y)&&Number.isInteger(p.len)&&inGrid(p.x,p.y,p.len)).map(p=>({...p}));
+  // 保存済みの配置が物理的に成り立つなら、改めて重力を適用
+  st={...fresh(),...obj,pieces:clean,preview:obj.preview.filter(s=>s&&inGrid(s.x,0,s.len)),suggestion:null,selected:null};st.idSeq=Math.max(st.idSeq||1,...clean.map(p=>p.id+1),1);gravity(st.pieces);
+ }catch(e){}}
+function snapshot(){history.push(JSON.stringify({...st,selected:null,suggestion:null}));if(history.length>40)history.shift();}
+function change(update,text=''){snapshot();update();st.suggestion=null;msg=text;save();render();scheduleCalc();}
+function undo(){if(!history.length)return;try{st={...fresh(),...JSON.parse(history.pop()),suggestion:null,selected:null};msg='↶ ひとつ前の状態に戻しました。';save();render();scheduleCalc();}catch(e){}}
+function seedGrid(){for(let y=0;y<H;y++)for(let x=0;x<W;x++){const b=document.createElement('button');b.type='button';b.className='cell';b.setAttribute('aria-label',`${y+1}行目・${x+1}列目`);b.addEventListener('click',()=>onCell(x,y));$('boardCells').append(b);}}
+function onCell(x,y){closePicker();if(st.selected!=null){const p=st.pieces.find(q=>q.id===st.selected);if(p&&canSlide(p,st.pieces,x)){movePiece(p.id,x);return;}}
+ const type=ANIMALS[st.placeType];if(!type)return;if(!freeAt(st.pieces,x,y,type.len)){status('⚠️ そこには配置できません。空いている左端のマスをタップしてください。');return;}
+ change(()=>{st.pieces.push({id:st.idSeq++,type:st.placeType,len:type.len,x,y,head:'left'});gravity(st.pieces);st.selected=null;},`${type.emoji} ${type.name}を配置しました。支えがないときは自動で落下します。`);
+}
+function selectPiece(id){const p=st.pieces.find(q=>q.id===id);if(!p)return;st.selected=id;msg=p.type==='unknown'?'❔ この動物の種類を選んでください。':`${describe(p)} を選択中。横にスワイプして移動できます。`;renderBoard();updateToolbar();if(p.type==='unknown')showPicker(p.id);else closePicker();}
+function selectType(type){const a=ANIMALS[type],p=st.pieces.find(q=>q.id===st.selected);
+ if(p&&p.type==='unknown'){
+  if(p.len!==a.len){status(`⚠️ ${a.name}は${a.len}マスです。${p.len}マスの動物を選んでください。`);return;}
+  change(()=>{p.type=type;st.selected=null;},`${a.emoji} ${a.name}に確定しました。`);
+  chooseNextUnknown();
+ }else{st.placeType=type;st.selected=null;msg=`${a.emoji} ${a.name}を選択。盤面の置きたいマスをタップしてください。`;closePicker();renderPalette();renderBoard();updateToolbar();save();}
+}
+function boxStyle(el,x,y,len){el.style.left=`${x/W*100}%`;el.style.top=`${y/H*100}%`;el.style.width=`${len/W*100}%`;el.style.height=`${100/H}%`;}
+function renderPalette(){const el=$('palette'),oldLeft=el.scrollLeft;el.replaceChildren();Object.entries(ANIMALS).filter(([k])=>k!=='unknown').forEach(([key,a])=>{const b=document.createElement('button');b.type='button';b.className='chip'+(st.placeType===key?' active':'');b.innerHTML=`<span class="em">${a.emoji}</span><strong>${a.name}</strong><small>${a.len}マス</small>`;b.setAttribute('aria-label',`${a.name}：${a.len}マス`);b.addEventListener('click',()=>selectType(key));el.append(b);});el.scrollLeft=oldLeft;}
+function renderBoard(){const layer=$('animalsLayer'),overlay=$('overlayLayer');layer.replaceChildren();overlay.replaceChildren();closePicker();
+ for(const p of st.pieces){const a=ANIMALS[p.type]||ANIMALS.unknown,b=document.createElement('button');b.type='button';b.className='animal'+(st.selected===p.id?' selected':'')+(st.suggestion?.id===p.id?' best':'');b.dataset.type=p.type;b.dataset.id=p.id;boxStyle(b,p.x,p.y,p.len);b.setAttribute('aria-label',`${a.name}、上から${p.y+1}行、左から${p.x+1}列。横にドラッグで移動`);b.innerHTML=`<span class="em">${a.emoji}</span>${p.len>1?`<span class="name">${a.name}</span>`:''}`;
+  b.addEventListener('pointerdown',e=>startDrag(e,p.id,b));b.addEventListener('click',e=>{if(e.detail===0)selectPiece(p.id);});layer.append(b);
+ }
+ if(st.suggestion){const p=st.pieces.find(z=>z.id===st.suggestion.id);if(p){const e=document.createElement('div');e.className='mark guide';boxStyle(e,st.suggestion.toX,p.y,p.len);e.textContent='ここ！';overlay.append(e);}}
+ const selected=st.pieces.find(p=>p.id===st.selected);if(selected?.type==='unknown')showPicker(selected.id);
+ $('boardStatus').textContent=msg||'🌱 動物はタップで選択、左右へスワイプで移動できます。';
+ updateToolbar();
+}
+function updateToolbar(){$('deleteBtn').disabled=!st.pieces.some(p=>p.id===st.selected);$('undoBtn').disabled=!history.length;$('turnBadge').textContent=`${st.turn} / 300ターン`;$('resolveNotice').hidden=!st.pieces.some(p=>p.type==='unknown');}
+function closePicker(){$('quickPicker').hidden=true;$('quickPicker').replaceChildren();}
+function showPicker(id){const p=st.pieces.find(q=>q.id===id);if(!p||p.type!=='unknown')return;const box=$('quickPicker');box.replaceChildren();const options=Object.entries(ANIMALS).filter(([key,a])=>key!=='unknown'&&a.len===p.len);
+ options.forEach(([key,a])=>{const btn=document.createElement('button');btn.type='button';btn.textContent=`${a.emoji} ${a.name}`;btn.addEventListener('pointerdown',e=>e.stopPropagation());btn.addEventListener('click',()=>selectType(key));box.append(btn);});
+ const dismiss=document.createElement('button');dismiss.className='pick-dismiss';dismiss.type='button';dismiss.textContent='×';dismiss.setAttribute('aria-label','種類の選択を閉じる');dismiss.addEventListener('click',()=>{st.selected=null;closePicker();updateToolbar();});box.append(dismiss);
+ // 上か下に寄せて表示し、盤面からはみ出さない
+ const px=Math.max(17,Math.min(83,(p.x+p.len/2)/W*100));box.style.left=`${px}%`;box.style.top=p.y>H/2?`${Math.max(0,(p.y-1.22)/H*100)}%`:`${Math.min(90,(p.y+1.1)/H*100)}%`;box.hidden=false;
+}
+function chooseNextUnknown(){const next=st.pieces.find(p=>p.type==='unknown');if(next){st.selected=next.id;renderBoard();status('❔ 次の「？」を選んでください。');}else{status('🎉 すべての動物が確定しました。次のバーを入力してください。');}}
+function movePiece(id,toX){const p=st.pieces.find(q=>q.id===id);if(!p||!canSlide(p,st.pieces,toX)){status('⚠️ その方向には別の動物があります。');return;}
+ const name=describe(p),dir=toX<p.x?'左':'右',steps=Math.abs(toX-p.x);
+ change(()=>{p.x=toX;gravity(st.pieces);const result=clearRows(st.pieces);st.pieces=result.pieces;st.selected=st.pieces.some(z=>z.id===id)?id:null;},`${name}を${dir}へ${steps}マス移動。空いた場所の動物は下に落ちました。`);
+}
+function startDrag(e,id,element){if(e.button!==0||!e.isPrimary)return;const p=st.pieces.find(q=>q.id===id);if(!p)return;e.preventDefault();closePicker();const px=$('board').getBoundingClientRect().width/W;drag={id,pointer:e.pointerId,startClientX:e.clientX,startX:p.x,clientPx:px,toX:p.x,element,ghost:null,moved:false,valid:false};st.selected=id;element.classList.add('selected');element.setPointerCapture(e.pointerId);element.addEventListener('pointermove',handleDragMove);element.addEventListener('pointerup',endDrag);element.addEventListener('pointercancel',cancelDrag);}
+function handleDragMove(e){if(!drag||e.pointerId!==drag.pointer)return;const p=st.pieces.find(q=>q.id===drag.id);if(!p)return;
+ const delta=e.clientX-drag.startClientX, cells=Math.round(delta/drag.clientPx);if(Math.abs(delta)>drag.clientPx*.25)drag.moved=true;
+ const toX=Math.max(0,Math.min(W-p.len,drag.startX+cells));const valid=toX!==drag.startX&&canSlide(p,st.pieces,toX);drag.toX=toX;drag.valid=valid;
+ if(!drag.ghost){const ghost=document.createElement('div');ghost.className='mark';drag.ghost=ghost;$('overlayLayer').append(ghost);}
+ drag.ghost.classList.toggle('invalid',!valid);boxStyle(drag.ghost,toX,p.y,p.len);drag.ghost.textContent=valid?'ここへ':'×';
+ drag.element.classList.add('dragging');drag.element.style.transform=`translateX(${Math.max(-drag.startX,Math.min(W-p.len-drag.startX,delta/drag.clientPx))*100/p.len}%)`;
+}
+function clearDragListeners(el){el.removeEventListener('pointermove',handleDragMove);el.removeEventListener('pointerup',endDrag);el.removeEventListener('pointercancel',cancelDrag);el.classList.remove('dragging');el.style.transform='';}
+function endDrag(e){if(!drag||e.pointerId!==drag.pointer)return;const d=drag;drag=null;clearDragListeners(d.element);if(d.ghost)d.ghost.remove();try{d.element.releasePointerCapture(e.pointerId);}catch(err){}
+ if(d.moved){if(d.valid)movePiece(d.id,d.toX);else{status('⚠️ その位置には動かせません。');renderBoard();}return;}
+ selectPiece(d.id);
+}
+function cancelDrag(e){if(!drag)return;const d=drag;drag=null;clearDragListeners(d.element);if(d.ghost)d.ghost.remove();renderBoard();}
+function deleteSelected(){if(st.selected==null)return;change(()=>{st.pieces=st.pieces.filter(p=>p.id!==st.selected);st.selected=null;gravity(st.pieces);const result=clearRows(st.pieces);st.pieces=result.pieces;},'🗑️ 選択中の動物を削除しました。上の動物は落下します。');}
+function settleNow(){change(()=>{gravity(st.pieces);const r=clearRows(st.pieces);st.pieces=r.pieces;},'⬇ 支えがなくなった動物を下まで落下させました。');}
+function buildBarButtons(){for(let n=1;n<=5;n++){const b=document.createElement('button');b.type='button';b.className='len-btn';b.dataset.len=n;b.textContent=n+'マス';b.addEventListener('click',()=>{st.previewLen=n;renderBar();save();});$('barSizes').append(b);}const clear=document.createElement('button');clear.type='button';clear.className='len-btn clear';clear.textContent='全消去';clear.addEventListener('click',()=>change(()=>{st.preview=[];},'予告バーを消しました。'));$('barSizes').append(clear);}
+function renderBar(){const bar=$('previewBar');bar.replaceChildren();for(let x=0;x<W;x++){const b=document.createElement('button');b.type='button';const seg=st.preview.find(z=>x>=z.x&&x<z.x+z.len);b.className='bar-cell'+(seg?' filled':'')+(seg?.x===x?' start':'');b.textContent=seg?(seg.x===x?`${seg.len}`:''):String(x+1);b.setAttribute('aria-label',seg?`${x+1}列：${seg.len}マスの予告を削除`:`${x+1}列：ここから${st.previewLen}マスの予告を入れる`);b.addEventListener('click',()=>onBar(x));bar.append(b);}
+ $('barStatus').textContent=`${st.preview.length}匹・${st.preview.reduce((s,p)=>s+p.len,0)}/9マス`;
+ for(const b of $('barSizes').children)b.classList.toggle('active',Number(b.dataset.len)===st.previewLen);
+}
+function onBar(x){const old=st.preview.find(p=>x>=p.x&&x<p.x+p.len);if(old){change(()=>{st.preview=st.preview.filter(p=>p!==old);},'予告の区間を削除しました。');return;}
+ const len=st.previewLen;if(!inGrid(x,0,len)||st.preview.some(p=>x<p.x+p.len&&x+len>p.x)){status('⚠️ 予告が右にはみ出すか、ほかの予告と重なっています。');return;}
+ change(()=>{st.preview.push({x,len});st.preview.sort((a,b)=>a.x-b.x);},`${len}マスの予告を${x+1}列目から登録しました。`);
+}
+function simulate(original,move,preview){let pieces=clonePieces(original);const p=pieces.find(q=>q.id===move.id);if(!p)return null;p.x=move.toX;gravity(pieces);
+ let cleaned=clearRows(pieces);pieces=cleaned.pieces;const overflow=pieces.some(p=>p.y===0);
+ // 新しい予告行を下から追加する前に盤面を一段押し上げる
+ pieces=pieces.filter(p=>p.y>0).map(p=>({...p,y:p.y-1}));let seq=Math.max(100000,...pieces.map(p=>p.id+1));
+ pieces.push(...preview.map(s=>({id:seq++,x:s.x,y:H-1,len:s.len,type:'unknown',head:'left'})));gravity(pieces);
+ // 予告行の後に消える列も幅に基づいて予測
+ const after=clearRows(pieces);pieces=after.pieces;return {pieces,rows:cleaned.rows+after.rows,bullHits:cleaned.bullHits+after.bullHits,chain:cleaned.chain+after.chain,overflow};
+}
+function evaluate(sim,move){const occ=Array.from({length:H},()=>Array(W).fill(false));for(const p of sim.pieces)for(let x=p.x;x<p.x+p.len;x++)occ[p.y][x]=true;
+ let highest=H,holes=0,loaded=0;for(let x=0;x<W;x++){let saw=false;for(let y=0;y<H;y++){if(occ[y][x]){saw=true;highest=Math.min(highest,y);loaded++;}else if(saw)holes++;}}
+ let topWeight=0;for(let y=0;y<5;y++)for(let x=0;x<W;x++)if(occ[y][x])topWeight+=(5-y)*(5-y);
+ let nearly=0;for(let y=0;y<H;y++){const cnt=occ[y].filter(Boolean).length;nearly+=cnt*cnt*.5;}
+ return sim.rows*1450+sim.bullHits*260+nearly-topWeight*24-holes*1.5-(sim.overflow?100000:0)-Math.abs(move.toX-move.fromX)*1.8;
+}
+function bestMove(){if(!st.pieces.length)return{why:'動物を置くと、この場所におすすめ手が表示されます。'};if(st.pieces.some(p=>p.type==='unknown'))return{why:'盤面の「？」をタップして、出現した動物を選んでください。'};if(!st.preview.length)return{why:'次のバーの幅と位置を入力してください。'};
+ let best=null,explored=0;for(const p of st.pieces){for(const d of [-1,1]){for(let x=p.x+d;canSlide(p,st.pieces,x);x+=d){const mv={id:p.id,fromX:p.x,toX:x},sim=simulate(st.pieces,mv,st.preview);if(!sim)continue;const score=evaluate(sim,mv);explored++;if(!best||score>best.score)best={...mv,...sim,score};}}}
+ if(!best)return{why:'横に移動できる動物がありません。盤面の位置を確認してください。'};return{...best,explored};
+}
+function renderAdvice(res){const el=$('result');el.replaceChildren();if(!res||res.id==null){const d=document.createElement('div');d.className='desc';d.textContent=res?.why||'盤面を入力してください。';el.append(d);return;}
+ const p=st.pieces.find(q=>q.id===res.id);if(!p)return;const a=ANIMALS[p.type];
+ const top=document.createElement('div');top.className='eyebrow';top.textContent='🌶️ おすすめの一手';
+ const title=document.createElement('div');title.className='headline';title.textContent=`${a.emoji} ${a.name}を${res.toX<p.x?'左':'右'}へ${Math.abs(res.toX-p.x)}マス！`;
+ const body=document.createElement('div');body.className='desc';body.textContent=`上から${p.y+1}行目・左から${p.x+1}列目 → 左端${res.toX+1}列目。赤から緑の枠へ動かしてください。`;
+ const badge=document.createElement('span');badge.className='tagline';badge.textContent=res.rows?`✨ 予測：${res.rows}列消去`:'🐾 盤面の積み上がりを考慮';el.append(top,title,body,badge);
+ if(res.overflow){const warn=document.createElement('div');warn.className='desc';warn.style.color='#bd3448';warn.textContent='⚠️ 次の行の出現で上端が詰まる可能性があります。';el.append(warn);}
+}
+function scheduleCalc(){clearTimeout(recalcTimer);if(!st.pieces.length||!st.preview.length||st.pieces.some(p=>p.type==='unknown')){st.suggestion=null;renderAdvice(bestMove());renderBoard();$('applyBtn').disabled=true;return;}
+ recalcTimer=setTimeout(()=>{const r=bestMove();st.suggestion=r?.id!=null?{id:r.id,fromX:r.fromX,toX:r.toX}:null;renderAdvice(r);renderBoard();$('applyBtn').disabled=st.turn>=300||!st.suggestion;},35);
+}
+function applySuggestion(){if(st.turn>=300){status('300ターンに到達しました。');return;}const sug=st.suggestion;if(!sug||!st.preview.length)return;const p=st.pieces.find(q=>q.id===sug.id);if(!p||!canSlide(p,st.pieces,sug.toX)){status('⚠️ 盤面が更新されています。おすすめ手を再計算します。');scheduleCalc();return;}
+ const sim=simulate(st.pieces,sug,st.preview);if(!sim)return;if(sim.overflow&&!confirm('上端が詰まり、ゲーム終了になる可能性があります。仮更新を続けますか？'))return;
+ change(()=>{st.pieces=sim.pieces;st.idSeq=Math.max(st.idSeq,...st.pieces.map(p=>p.id+1),1);st.preview=[];st.selected=null;st.turn++;},`🐾 ${st.turn+1}ターン目。次に現れた「？」をタップして動物の種類を選んでください。`);
+ chooseNextUnknown();
+}
+function demo(){if(st.pieces.length&&!confirm('現在の入力をお試し盤面に置き換えますか？'))return;
+ change(()=>{st=fresh();const data=[['pig',0,10],['cat',4,10],['chick',8,10],['donkey',0,9],['fox',6,9],['weasel',5,8],['snake',1,7],['bear',4,6]];for(const [type,x,y]of data){const len=ANIMALS[type].len;if(freeAt(st.pieces,x,y,len))st.pieces.push({id:st.idSeq++,type,x,y,len,head:'left'});}gravity(st.pieces);st.preview=[{x:0,len:3},{x:4,len:2},{x:7,len:2}];},'✨ お試し盤面をセットしました。');
+}
+function reset(){if(!confirm('盤面と次のバーを消して最初からやり直しますか？'))return;change(()=>{st=fresh();},'🌱 盤面を初期化しました。');}
+function render(){renderPalette();renderBoard();renderBar();updateToolbar();}
+function init(){restore();seedGrid();buildBarButtons();$('deleteBtn').addEventListener('click',deleteSelected);$('undoBtn').addEventListener('click',undo);$('dropBtn').addEventListener('click',settleNow);$('clearBtn').addEventListener('click',reset);$('demoBtn').addEventListener('click',demo);$('applyBtn').addEventListener('click',applySuggestion);render();scheduleCalc();}
+init();
+</script>
+</body>
+</html>

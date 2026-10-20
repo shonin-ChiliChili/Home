@@ -1,272 +1,305 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>花札の恋</title>
-
-    <style>
-        /* ＝ 全体の設定（style.cssに合わせたシンプルテーマ） ＝ */
-        :root {
-            --bg-color: #f4f6f8;      /* 明るいグレー背景 */
-            --primary: #3f51b5;       /* メインカラー（ネイビーブルー） */
-            --card-bg: #ffffff;       /* カード背景色 */
-            --text-main: #333333;
-            --text-sub: #666666;
-            --border-color: #e0e0e0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--text-main);
-            text-align: center;
-            padding: 20px 15px 40px;
-            margin: 0 auto;
-            max-width: 600px;
-            background-color: var(--bg-color);
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* ＝ 背景装飾（シンプル化のため非表示） ＝ */
-        .bg-bubble {
-            display: none;
-        }
-
-        /* ＝ タイトル ＝ */
-        h1 {
-            margin: 10px 0 20px;
-            font-size: 1.5rem;
-            color: var(--text-main);
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* ＝ 中央のメインコンテンツ容器 ＝ */
-        .main-container {
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* ＝ メインカード ＝ */
-        .content-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px 15px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-color);
-            position: relative;
-            text-align: center;
-        }
-
-        /* ＝ コントロール（選択＆ボタン） ＝ */
-        .controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        select {
-            padding: 10px 15px;
-            font-size: 15px;
-            font-family: inherit;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background-color: #ffffff;
-            width: 100%;
-            max-width: 320px;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .btn-reset {
-            display: inline-block;
-            text-align: center;
-            padding: 12px 20px;
-            background: var(--primary);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px; 
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: bold;
-            transition: background-color 0.2s, opacity 0.2s;
-            width: 100%;
-            max-width: 320px;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-        .btn-reset:hover {
-            opacity: 0.9;
-        }
-        .btn-reset:active {
-            transform: scale(0.98);
-        }
-
-        /* ＝ 盤面のグリッド設定 ＝ */
-        .board {
-            display: grid;
-            gap: 8px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .board[data-size="2x3"] { grid-template-columns: repeat(3, 1fr); max-width: 360px; }
-        .board[data-size="3x4"] { grid-template-columns: repeat(4, 1fr); max-width: 480px; }
-        .board[data-size="4x4"] { grid-template-columns: repeat(4, 1fr); max-width: 480px; }
-        .board[data-size="4x5"] { grid-template-columns: repeat(5, 1fr); max-width: 580px; }
-
-        /* ＝ 札の基本スタイル ＝ */
-        .card {
-            width: 100%;
-            aspect-ratio: 2 / 3;
-            position: relative;
-            cursor: pointer;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            overflow: hidden;
-            background-color: #e0e0e0;
-            border: 1px solid var(--border-color);
-            transition: transform 0.15s, box-shadow 0.15s;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-        }
-
-        .card img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .card .back-img { z-index: 3; object-fit: cover; }
-        .card .bg-img { z-index: 1; object-fit: cover; display: none; }
-        .card .pattern-img { z-index: 2; object-fit: contain; display: none; transform: scale(0.9); }
-
-        .card.flipped .back-img { display: none; }
-        .card.flipped .bg-img { display: block; }
-        .card.flipped .pattern-img { display: block; }
-
-        /* ＝ 柄選択モーダル ＝ */
-        #selector-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-        .selector-content {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            max-width: 90%;
-            width: 320px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            max-height: 80vh;
-            overflow-y: auto;
-            box-sizing: border-box;
-        }
-        .selector-item {
-            width: 65px;
-            height: 65px;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background-color: #f9f9f9;
-            transition: border-color 0.2s, transform 0.2s;
-            box-sizing: border-box;
-        }
-        .selector-item:hover, .selector-item:active {
-            border-color: var(--primary);
-            transform: scale(1.05);
-            background-color: #ffffff;
-        }
-        .selector-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .reset-modal-btn {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            background: #e0e0e0;
-            color: var(--text-main);
-            border: none;
-            border-radius: 6px;
-            font-family: inherit;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .reset-modal-btn:hover {
-            background: #d0d0d0;
-        }
-        .reset-modal-btn:active {
-            transform: scale(0.98);
-        }
-        
-        /* スクロールバーのデザイン調整 */
-        .selector-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        .selector-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        .selector-content::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#cf3f4c">
+<title>花札の恋 | 🌶️ Chili²商会</title>
+<style>
+  :root {
+    --red: #d13d4c;
+    --red-dark: #923543;
+    --rose: #fff0f0;
+    --bg: #fff8f4;
+    --ink: #47363b;
+    --sub: #806c70;
+    --line: #efd9d3;
+    --board: #fff5e7;
+    --shadow: 0 5px 18px #79393c0d;
+  }
+  * { box-sizing: border-box; }
+  html { min-height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, select { font: inherit; }
+  button { cursor: pointer; touch-action: manipulation; }
+  button:focus-visible, select:focus-visible, .card:focus-visible {
+    outline: 3px solid #ffbb45;
+    outline-offset: 3px;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 0 12px 34px; }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: linear-gradient(125deg, #fa7772, #ca334c);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 14px #a83d5233;
+  }
+  .brand { font-size: 19px; font-weight: 900; line-height: 1.35; }
+  .brand small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .06em;
+    font-weight: 600;
+    opacity: .92;
+    margin-top: 2px;
+  }
+  .pill {
+    font-size: 11px;
+    font-weight: 750;
+    padding: 7px 10px;
+    border: 1px solid #ffffff90;
+    border-radius: 30px;
+    white-space: nowrap;
+  }
+  .headrow { margin: 16px 2px 12px; }
+  h1 { color: var(--red-dark); margin: 0; font-size: clamp(20px, 5.3vw, 24px); line-height: 1.4; }
+  .subhead { font-size: 12px; color: var(--sub); line-height: 1.6; margin: 4px 0 0; }
+  .main-container { width: 100%; max-width: 690px; margin: 0 auto; }
+  .content-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+  }
+  .panel-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .panel-title h2 { font-size: 16px; margin: 0; color: var(--red-dark); }
+  .panel-label { font-size: 11px; font-weight: 800; color: #bb5260; background: #fff0ef; padding: 5px 9px; border-radius: 99px; }
+  .controls { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: center; margin-bottom: 13px; }
+  .control-label { display: block; color: var(--sub); font-size: 11px; font-weight: 700; margin: 0 0 5px; }
+  .select-wrap { min-width: 0; }
+  select {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 10px;
+    color: var(--ink);
+    border: 1px solid #edcfc8;
+    border-radius: 11px;
+    background: #fffdfb;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .btn-reset {
+    align-self: end;
+    display: block;
+    min-height: 46px;
+    padding: 11px 14px;
+    background: linear-gradient(120deg, #ef606a, #c93652);
+    color: #fff;
+    border: 0;
+    border-radius: 11px;
+    font-size: 13px;
+    font-weight: 850;
+    white-space: nowrap;
+    box-shadow: 0 4px 9px #bc39502f;
+  }
+  .btn-reset:active, .reset-modal-btn:active, .modal-close:active { transform: scale(.98); }
+  .board-shell {
+    background: var(--board);
+    border: 1px solid #f0d8c8;
+    border-radius: 15px;
+    padding: clamp(10px, 3vw, 19px);
+    min-height: 230px;
+  }
+  .board { display: grid; gap: clamp(5px, 1.7vw, 9px); width: 100%; margin: 0 auto; }
+  .board[data-size="2x3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 360px; }
+  .board[data-size="3x4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 480px; }
+  .board[data-size="4x4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 480px; }
+  .board[data-size="4x5"] { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 580px; }
+  .card {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    position: relative;
+    cursor: pointer;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px #74504b21;
+    overflow: hidden;
+    background: #e8dad2;
+    border: 1px solid #dfcabf;
+    touch-action: manipulation;
+  }
+  .card.flipped { border-color: #dc7b83; box-shadow: 0 2px 6px #b847582e; background: white; }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .card .back-img { z-index: 3; object-fit: cover; }
+  .card .bg-img { z-index: 1; object-fit: cover; display: none; }
+  .card .pattern-img { z-index: 2; object-fit: contain; display: none; transform: scale(.9); }
+  .card.flipped .back-img { display: none; }
+  .card.flipped .bg-img { display: block; }
+  .card.flipped .pattern-img { display: block; }
+  @media (hover:hover) and (pointer:fine) {
+    .card { transition: transform .15s, box-shadow .15s; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 5px 11px #74504b30; }
+    .btn-reset:hover { filter: brightness(1.04); }
+  }
+  .board-tip {
+    margin: 12px 0 0;
+    background: #fff5f0;
+    border: 1px solid #f5e0d5;
+    color: #92616a;
+    border-radius: 11px;
+    padding: 9px 11px;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .footer { color: #bd9598; text-align: center; font-size: 11px; margin: 15px 0 0; }
+  /* 絵柄選択: モーダルの表示切替は元のJavaScriptのまま */
+  #selector-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #2e2229a8;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+  }
+  .selector-shell {
+    display: flex;
+    flex-direction: column;
+    width: min(430px, 100%);
+    max-height: min(85dvh, 720px);
+    overflow: hidden;
+    border-radius: 19px;
+    border: 1px solid #f0d2ce;
+    background: #fffdfb;
+    box-shadow: 0 15px 50px #4021324b;
+  }
+  .selector-header {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 16px 12px;
+    background: linear-gradient(125deg, #fff0ed, #fff9f5);
+    border-bottom: 1px solid #f5dfdb;
+  }
+  .selector-header strong { display:block; font-size: 16px; color: var(--red-dark); }
+  .selector-header small { display:block; margin-top: 3px; font-size: 11px; color: var(--sub); }
+  .modal-close {
+    flex: 0 0 auto;
+    border: 1px solid #efcfc9;
+    color: var(--red-dark);
+    background: #fff;
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .selector-content {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+    padding: 14px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #e8b2b4 transparent;
+  }
+  .selector-item {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid #eed8d3;
+    border-radius: 10px;
+    background: #fff9f6;
+    cursor: pointer;
+    transition: border-color .15s, background-color .15s;
+  }
+  .selector-item:active, .selector-item:hover { border-color: var(--red); background: #fff0ef; }
+  .selector-item img { width:100%; height:100%; object-fit: contain; display:block; }
+  .reset-modal-btn {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    min-height: 43px;
+    border: 1px solid #f1d5d1;
+    border-radius: 10px;
+    background: #fff0ef;
+    color: var(--red-dark);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  @media (max-width: 380px) {
+    .page { padding: 0 8px 25px; }
+    .header { padding: 11px 10px; }
+    .brand { font-size: 17px; }
+    .pill { font-size: 10px; padding: 7px 8px; }
+    .headrow { margin: 12px 2px 10px; }
+    .content-card { padding: 10px; }
+    .panel-title h2 { font-size: 14px; }
+    .controls { gap: 7px; }
+    select, .btn-reset { font-size: 11px; padding-left: 8px; padding-right: 8px; }
+    .board-shell { padding: 8px; }
+    .selector-content { gap: 7px; padding: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card, .selector-item { transition: none !important; }
+  }
+</style>
 </head>
 <body>
+<div class="page">
+  <header class="header">
+    <div class="brand">🌶️ Chili²商会<small>ゲームイベント攻略ツール</small></div>
+    <span class="pill">🌸 花札の恋</span>
+  </header>
 
-<!-- 背景の気泡装飾（CSSで非表示処理） -->
-<div class="bg-bubble b1"></div>
-<div class="bg-bubble b2"></div>
-<div class="bg-bubble b3"></div>
+  <div class="headrow">
+    <h1>🌸 花札の恋</h1>
+    <p class="subhead">札をタップして絵柄を記録。ゲームの進行に合わせて盤面を再現できます。</p>
+  </div>
 
-<h1>花札の恋</h1>
+  <main class="main-container">
+    <section class="content-card" aria-label="花札の恋 盤面">
+      <div class="panel-title">
+        <h2>🎴 札の配置</h2>
+        <span class="panel-label">タップして選択</span>
+      </div>
 
-<div class="main-container">
-    <div class="content-card">
-        
-        <div class="controls">
-            <select id="boardSize">
-                <option value="2x3">縦2 × 横3 (1〜2ゲーム目)</option>
-                <option value="3x4">縦3 × 横4 (3〜5ゲーム目)</option>
-                <option value="4x4">縦4 × 横4 (6〜8ゲーム目)</option>
-                <option value="4x5">縦4 × 横5 (9〜10ゲーム目)</option>
-            </select>
-            <button class="btn-reset" onclick="initBoard()">盤面をリセット</button>
+      <div class="controls">
+        <div class="select-wrap">
+          <label class="control-label" for="boardSize">ゲームの進行度</label>
+          <select id="boardSize" aria-label="盤面の大きさ" onchange="initBoard()">
+            <option value="2x3">縦2 × 横3（1〜2ゲーム目）</option>
+            <option value="3x4">縦3 × 横4（3〜5ゲーム目）</option>
+            <option value="4x4">縦4 × 横4（6〜8ゲーム目）</option>
+            <option value="4x5">縦4 × 横5（9〜10ゲーム目）</option>
+          </select>
         </div>
+        <button type="button" class="btn-reset" onclick="initBoard()">↻ リセット</button>
+      </div>
 
-        <!-- 盤面エリア -->
+      <div class="board-shell">
         <div id="board" class="board" data-size="2x3"></div>
-
-    </div>
+      </div>
+      <p class="board-tip">💡 札をタップ → 絵柄を選択。変更したいときも同じ札をタップしてください。</p>
+    </section>
+  </main>
+  <footer class="footer">🌶️ Chili²商会</footer>
 </div>
 
-<!-- 柄選択モーダル -->
-<div id="selector-modal">
-    <div class="selector-content" id="selector-content">
-        <!-- JSで柄のリストを生成 -->
+<!-- 絵柄選択画面：絵柄設定とリセット処理は元のまま -->
+<div id="selector-modal" role="dialog" aria-modal="true" aria-label="絵柄を選ぶ">
+  <div class="selector-shell">
+    <div class="selector-header">
+      <div><strong>🌸 絵柄を選ぶ</strong><small>登録したい札の絵柄をタップしてください</small></div>
+      <button type="button" class="modal-close" onclick="closeSelector()" aria-label="閉じる">×</button>
     </div>
+    <div class="selector-content" id="selector-content"></div>
+  </div>
 </div>
 
 <script>
@@ -386,6 +419,5 @@
         initBoard();
     };
 </script>
-
 </body>
 </html>
